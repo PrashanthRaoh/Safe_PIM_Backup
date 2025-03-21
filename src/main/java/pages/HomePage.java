@@ -24,10 +24,6 @@ public class HomePage {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 	}
 
-	public WebElement waitForElementToBeClickable(WebElement elementtobewaited) {
-		return wait.until(ExpectedConditions.elementToBeClickable(elementtobewaited));
-	}
-
 	public WebElement HomePage_SearchButton() {
 		WebElement searchBtn = driver.findElement(RootElement).getShadowRoot().findElement(By.cssSelector("[id^='rs']"))
 				.getShadowRoot().findElement(By.cssSelector("#navMenu")).getShadowRoot()

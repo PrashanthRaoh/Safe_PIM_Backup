@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import common_functions.Utils;
-
-
 public class Login_Page  {
 	
 	private WebDriver driver;
@@ -42,15 +40,12 @@ public class Login_Page  {
     }
 	
 	public void LaunchSite() {
-//		driver.get("https://timkenfs.riversand.com/home");
 		driver.get("https://timkends.syndigo.com/?idp=timkends_auth0_idp");
 	}
 	
     public void clickSubmit() {
         driver.findElement(Submitbutton).click();
     }
-	
-    
     public static String getProperty(String key) throws IOException {
     	String filepath = System.getProperty("user.dir") + "/src/test/resources/" + "credentials.properties";
     	Properties properties = new Properties();
@@ -58,16 +53,11 @@ public class Login_Page  {
 		properties.load(fis);
 		String val = (String) properties.get(key);
 		fis.close();
-		
 		return val;
     }
     
-    
 	public void LogintoPIM() throws IOException {
 		LaunchSite();
-//		enterEmail("systemadmin.test1@timken.com");
-//		enterPassword("PivotreeTmkSys@24$");
-		
 		String credentials = getProperty("OwnerMarketing");
 		String[] abc = credentials.split(",");
 		System.out.println("Username: " + abc[0]);
@@ -78,9 +68,9 @@ public class Login_Page  {
 		
 		enterEmail(username);
 		enterPassword(password);
-		
 		clickSubmit();
-		utils.waitForElement(homePage.HomePage_SearchButton(), "clickable");
-		utils.Takescreenshot();
+//		utils.Takescreenshot();
+		
+		 homePage = new HomePage(driver);
 	}
 }

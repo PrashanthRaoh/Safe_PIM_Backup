@@ -40,39 +40,16 @@ public class SearchPage2 {
 	}
 
 	public WebElement getFilterButton() {
-//		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager"))
-//				.getShadowRoot().findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
-//				.findElement(By.cssSelector("#search-filter")).getShadowRoot().findElement(filterButtonLocator)
-//				.getShadowRoot().findElement(By.cssSelector("#buttonTextBox"));
-
 		return commonelement().getShadowRoot().findElement(filterButtonLocator).getShadowRoot()
 				.findElement(By.cssSelector("#buttonTextBox"));
 	}
 
 	public WebElement Search_button_After_Filter() {
-//		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager"))
-//				.getShadowRoot().findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
-//				.findElement(By.cssSelector("#search-filter")).getShadowRoot().findElement(By
-//						.cssSelector("#refineFilterPopover > div > div.p-relative.p-b-10.base-grid-structure-child-1"));
-
 		return commonelement().getShadowRoot().findElement(
 				By.cssSelector("#refineFilterPopover > div > div.p-relative.p-b-10.base-grid-structure-child-1"));
 	}
 
 	public WebElement Filter_Results() {
-//		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager"))
-//				.getShadowRoot().findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
-//				.findElement(By.cssSelector("#search-filter"))
-
 		return commonelement().getShadowRoot().findElement(By.cssSelector("#attributeModelLov_thing")).getShadowRoot()
 				.findElement(By.cssSelector("#modelLov_thing")).getShadowRoot()
 				.findElement(By.cssSelector(
@@ -95,57 +72,23 @@ public class SearchPage2 {
 	public void enterMaterialId(String materialId) {
 		WebElement searchField = getSearchField();
 		wait.until(ExpectedConditions.elementToBeClickable(searchField));
-
 		searchField.sendKeys(materialId);
 		searchField.sendKeys(Keys.ENTER);
 	}
 
-//    public int getRowCount() {
-//        List<WebElement> rows = getGridRoot().findElements(By.cssSelector("div.ag-root-wrapper-body div.ag-center-cols-clipper > div > div > div"));
-//        return rows.size();
-//    }
-
 	public WebElement getgrid() {
-		WebElement gridRows =
-//    driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//			.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//			.findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
-//			.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
-//			.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-//			.findElement(By.cssSelector("#entitySearchGrid")).getShadowRoot()
-//			.findElement(By.cssSelector("#entityGrid")).getShadowRoot()
-//			.findElement(By.cssSelector("#pebbleGridContainer > pebble-grid")).getShadowRoot()
-//			.findElement(By.cssSelector("#grid")).getShadowRoot()
-
-				getGridRoot().getShadowRoot().findElement(By.cssSelector(
-						"#lit-grid> div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed >div.ag-root.ag-unselectable.ag-layout-normal> div.ag-body-viewport.ag-layout-normal.ag-row-no-animation> div.ag-center-cols-clipper > div.ag-center-cols-viewport > div.ag-center-cols-container"));
+		WebElement gridRows = getGridRoot().getShadowRoot().findElement(By.cssSelector(
+				"#lit-grid> div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed >div.ag-root.ag-unselectable.ag-layout-normal> div.ag-body-viewport.ag-layout-normal.ag-row-no-animation> div.ag-center-cols-clipper > div.ag-center-cols-viewport > div.ag-center-cols-container"));
 		return gridRows;
 	}
 
 	public WebElement Search_MaterialType() {
-//		WebElement inputElement = driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
-//				.findElement(By.cssSelector("#search-filter"))
-
 		WebElement inputElement = commonelement().getShadowRoot().findElement(By.cssSelector("#refineMoreSearchbox"))
 				.getShadowRoot().findElement(By.cssSelector("#input"));
 		return inputElement;
-
 	}
 
 	public WebElement ResultgridThingDomain() {
-//		WebElement resultgridthingdomain = driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
-//				.findElement(By.cssSelector("#search-filter"))
-
 		WebElement resultgridthingdomain = commonelement().getShadowRoot()
 				.findElement(By.cssSelector("#attributeModelLov_thing")).getShadowRoot()
 				.findElement(By.cssSelector("#modelLov_thing")).getShadowRoot()
@@ -177,14 +120,6 @@ public class SearchPage2 {
 	}
 
 	public WebElement SearchThingfiltersearch_Second_result() {
-//		WebElement SearchThingfiltersearch_Second_result = driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-//				.findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
-//				.findElement(By.cssSelector("#search-filter"))
-
 		WebElement SearchThingfiltersearch_Second_result = commonelement().getShadowRoot()
 				.findElement(By.cssSelector("#attributeModelLov_thing")).getShadowRoot()
 				.findElement(By.cssSelector("#modelLov_thing")).getShadowRoot()
@@ -195,24 +130,49 @@ public class SearchPage2 {
 
 		return SearchThingfiltersearch_Second_result;
 	}
-	
+
 	public WebElement Classification_Search_inputbox() {
-		return  driver.findElement(By.cssSelector("#app")).getShadowRoot()
-			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-			    .findElement(By.cssSelector("#currentApp_search-thing_rsTefCEdMb562HIy4g")).getShadowRoot()
-			    .findElement(By.cssSelector("#app-entity-discovery-component-rsiEVtLvIN8mV0cNRA")).getShadowRoot()
-			    .findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
-			    .findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
-			    .findElement(By.cssSelector("#search-filter")).getShadowRoot()
-			    .findElement(By.cssSelector("#pathSelector")).getShadowRoot()
-			    .findElement(By.cssSelector("#classification-contextTree")).getShadowRoot()
-			    .findElement(By.cssSelector("#classificationSearchBar")).getShadowRoot()
-			    .findElement(By.cssSelector("#input"));
+		return commonelement().getShadowRoot().findElement(By.cssSelector("#pathSelector")).getShadowRoot()
+				.findElement(By.cssSelector("#classification-contextTree")).getShadowRoot()
+				.findElement(By.cssSelector("#classificationSearchBar")).getShadowRoot()
+				.findElement(By.cssSelector("#input"));
 	}
 
-//    public WebElement Filterbutton_On_Search_Page() {
-//        WebElement filterButton = getFilterButton();
-//        return filterButton;
-////        filterButton.click();
-//    }
+	public WebElement widerangeCheckbox() {
+		return commonelement().getShadowRoot().findElement(By.cssSelector("#pathSelector")).getShadowRoot()
+				.findElement(By.cssSelector("#classification-contextTree")).getShadowRoot()
+				.findElement(By.cssSelector("#contextTree")).getShadowRoot()
+				.findElement(By.cssSelector("ul > pebble-tree-node")).getShadowRoot()
+				.findElement(By.cssSelector("#expand-all-btn-container-li > div.check-box-wrapper > pebble-checkbox"));
+	}
+
+	public WebElement classficationwindow_Applybtn() {
+		return commonelement().getShadowRoot().findElement(By.cssSelector("#pathSelector")).getShadowRoot()
+				.findElement(By.cssSelector("#download")).getShadowRoot().findElement(By.cssSelector("#buttonTextBox"));
+	}
+	
+	public WebElement ProgressRing() {
+		return  driver.findElement(By.cssSelector("#app")).getShadowRoot()
+			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#entityManageHeader")).getShadowRoot()
+			    .findElement(By.cssSelector("#graphProgress")).getShadowRoot()
+			    .findElement(By.cssSelector("#progressRing")).getShadowRoot()
+			    .findElement(By.cssSelector("#score"));
+	}
+
+	public WebElement BusinessRule() {
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
+			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-entity-summary-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#rock-entity-tofix")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-entity-tofix-component-rs']"));
+
+	}
 }
