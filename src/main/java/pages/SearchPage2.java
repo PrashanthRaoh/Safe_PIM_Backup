@@ -295,6 +295,5 @@ public class SearchPage2 {
 			    .getShadowRoot().findElement(By.cssSelector("#grid")).getShadowRoot()
 			    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div.ag-row.ag-row-odd.ag-row-level-0.ag-row-position-absolute.ag-row-no-focus > div > pebble-lov-item"))
 			    .getShadowRoot().findElement(By.cssSelector("div > div"));
-
 	}
 }
