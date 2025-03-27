@@ -46,7 +46,7 @@ public class BaseTest {
 		extentreport.attachReporter(sparkReporter);
 
 		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(90));
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(150));
 		driver.manage().window().maximize();
 		utils = new Utils(driver);
 		Login_Page loginPage = new Login_Page(driver);

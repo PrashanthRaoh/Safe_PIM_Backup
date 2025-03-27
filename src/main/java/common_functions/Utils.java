@@ -15,19 +15,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Utils extends BaseTest {
-//	private WebDriver driver;
 //	private WebDriverWait wait;
 
-	static WebDriver driver;
+	private WebDriver driver;
 	WebDriverWait wait;
 
 	public Utils(WebDriver driver) {
 		this.driver = driver;
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 	}
 
 //	 Generic wait function
 	public WebElement waitForElement(WebElement element, String conditionType) {
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		switch (conditionType) {
 		case "clickable":
 			return wait.until(ExpectedConditions.elementToBeClickable(element));

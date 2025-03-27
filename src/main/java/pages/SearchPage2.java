@@ -150,29 +150,152 @@ public class SearchPage2 {
 		return commonelement().getShadowRoot().findElement(By.cssSelector("#pathSelector")).getShadowRoot()
 				.findElement(By.cssSelector("#download")).getShadowRoot().findElement(By.cssSelector("#buttonTextBox"));
 	}
-	
+
+	public WebElement searchthingdomain_Input_Mat_Id() {
+		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager"))
+				.getShadowRoot().findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
+				.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+				.findElement(By.cssSelector("#searchBar")).getShadowRoot().findElement(By.cssSelector("#input"));
+
+	}
+
 	public WebElement ProgressRing() {
-		return  driver.findElement(By.cssSelector("#app")).getShadowRoot()
-			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("#entityManageHeader")).getShadowRoot()
-			    .findElement(By.cssSelector("#graphProgress")).getShadowRoot()
-			    .findElement(By.cssSelector("#progressRing")).getShadowRoot()
-			    .findElement(By.cssSelector("#score"));
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#entityManageHeader")).getShadowRoot()
+				.findElement(By.cssSelector("#graphProgress")).getShadowRoot()
+				.findElement(By.cssSelector("#progressRing")).getShadowRoot().findElement(By.cssSelector("#score"));
 	}
 
 	public WebElement BusinessRule() {
 		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
-			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
-			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='rock-entity-summary-component-rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("#rock-entity-tofix")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='rock-entity-tofix-component-rs']"));
+				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot().findElement(By.cssSelector("#rockTabs"))
+				.getShadowRoot().findElement(By.cssSelector("[id^='rock-entity-summary-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#rock-entity-tofix")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-entity-tofix-component-rs']"));
+
+	}
+
+	public WebElement SummaryCommonElement() {
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-manage-component']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-wizard-manage-component']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage"));
+	}
+
+	public WebElement similarElementforInput_Summary() {
+		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager"))
+				.getShadowRoot().findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot().findElement(By.cssSelector("#rockTabs"))
+				.getShadowRoot().findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+				.findElement(By.cssSelector("#rock-attribute-list-container > rock-attribute-list")).getShadowRoot()
+				.findElement(By.cssSelector("div > div > div > pebble-accordion > div > div"));
+	}
+
+	public WebElement shortDescription() {
+		return similarElementforInput_Summary()
+				.findElement(By.cssSelector(
+						".attribute-box.attribute-box-2-by-3.textarea.overflow-hidden[name='shortdescription']"))
+				.findElement(By.cssSelector("[mode='edit']")).getShadowRoot()
+				.findElement(By.cssSelector(".attribute.list.textarea"))
+				.findElement(By.cssSelector("#input")).getShadowRoot()
+				.findElement(By.cssSelector(".attribute-control")).getShadowRoot()
+				.findElement(By.cssSelector("#textarea"));
+	}
+
+	public WebElement LongDescription() {
+//		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
+//			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+//			    .findElement(By.cssSelector("#rock-attribute-list-container > rock-attribute-list")).getShadowRoot()
+//			    .findElement(By.cssSelector("div > div > div > pebble-accordion > div > div"))
+
+		return similarElementforInput_Summary()
+				.findElement(By.cssSelector(
+						".attribute-box.attribute-box-2-by-3.textarea.overflow-hidden[name='longdescription']"))
+				.findElement(By.cssSelector("[mode='edit']")).getShadowRoot()
+				.findElement(By.cssSelector(".attribute.list.textarea"))
+				.findElement(By.cssSelector("#input")).getShadowRoot()
+				.findElement(By.cssSelector(".attribute-control")).getShadowRoot()
+				.findElement(By.cssSelector("#textarea"));
+	}
+
+	public WebElement SaveTransaction_btn() {
+//		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+//			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
+//			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+//			    .findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+		return SummaryCommonElement().getShadowRoot().findElement(By.cssSelector("#next")).getShadowRoot()
+				.findElement(By.cssSelector("#simpleButton"));
+
+	}
+	
+	
+	public WebElement ATO_Marketing_Enrichment_Buss_Condition_Filter() {
+		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
+			    .findElement(By.cssSelector("#search-filter")).getShadowRoot()
+			    .findElement(By.cssSelector("#BCModelLov")).getShadowRoot()
+			    .findElement(By.cssSelector("#BCModelLov")).getShadowRoot()
+			    .findElement(By.cssSelector("div.base-grid-structure.p-relative.hideLovHeader > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid"))
+			    .getShadowRoot().findElement(By.cssSelector("#grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div > div > pebble-lov-item"))
+			    .getShadowRoot().findElement(By.cssSelector("div > div"));
+
+	}
+	
+	public WebElement common_Enrichment_Filter_Ele() {
+		return 
+				driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
+			    .findElement(By.cssSelector("#search-filter")).getShadowRoot()
+			    .findElement(By.cssSelector("#businessConditionLov"));
+	}
+	
+	public WebElement Failed_Buss_Condition() {
+//		return 
+//				driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
+//			    .findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
+//			    .findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+//			    .findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
+//			    .findElement(By.cssSelector("#search-filter")).getShadowRoot()
+//			    .findElement(By.cssSelector("#businessConditionLov"))
+			    
+		return common_Enrichment_Filter_Ele().getShadowRoot()
+			    .findElement(By.cssSelector("div.base-grid-structure.p-relative.hideLovHeader > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid"))
+			    .getShadowRoot().findElement(By.cssSelector("#grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div.ag-row.ag-row-odd.ag-row-level-0.ag-row-position-absolute.ag-row-no-focus > div > pebble-lov-item"))
+			    .getShadowRoot().findElement(By.cssSelector("div > div"));
 
 	}
 }
