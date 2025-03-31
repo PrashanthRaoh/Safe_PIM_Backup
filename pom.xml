@@ -6,9 +6,7 @@
 	<artifactId>pim.automation.framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-
 	<dependencies>
-
 		<!--
 		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
@@ -39,6 +37,13 @@
 			<version>3.5.2</version>
 		</dependency>
 
+<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.8.0</version>
+    
+</dependency>
 		<!--
 		https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
@@ -68,7 +73,7 @@
 				<version>3.5.2</version> <!-- Use the latest version -->
 				<configuration>
 					<suiteXmlFiles>
-						<suiteXmlFile>testng.xml</suiteXmlFile> <!-- Optional,
+						<suiteXmlFile>testng123.xml</suiteXmlFile> <!-- Optional,
 						see below for more details -->
 					</suiteXmlFiles>
 				</configuration>

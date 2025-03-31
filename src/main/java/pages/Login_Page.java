@@ -19,7 +19,7 @@ public class Login_Page  {
     public Utils utils;
     public HomePage homePage;
     
-    private By emailField = By.cssSelector("[id='username']");
+    public By emailField = By.cssSelector("[id='username']");
     private By passwordfield = By.cssSelector("[id='password']");
     private By Submitbutton = By.xpath("(//button[@type=\"submit\"])[2]");
     
