@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -239,6 +240,60 @@ public class HomePage {
     .findElement(By.cssSelector("#userProfile")).getShadowRoot()
     .findElement(By.cssSelector("#rsLogOut > span.option-value.text-ellipsis"));
 	}
+	
+	
+//	public WebElement Moredetails_MarketingEnrich() {
+//		return 
+//				driver.findElement(By.cssSelector("#app")).getShadowRoot()
+//			      .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+//			      .findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
+//			      .findElement(By.cssSelector("[id^='app-dashboard-component-rs']")).getShadowRoot()
+//			      .findElement(By.cssSelector("rock-layout > rock-dashboard-widgets")).getShadowRoot()
+//			      .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+//			      .findElement(By.cssSelector("#rock-my-todos")).getShadowRoot()
+//			      .findElement(By.cssSelector("[id^='rock-my-todos-component-rs']")).getShadowRoot()
+//			      .findElement(By.cssSelector("#rock-my-todos-tabs")).getShadowRoot()
+//			      .findElement(By.cssSelector("[id^='my-todo-summary-list-component-rs']")).getShadowRoot()
+//			      .findElement(By.cssSelector("pebble-list-view > pebble-list-item > my-todo-summary")).getShadowRoot()
+//			      .findElement(By.cssSelector("#viewDetails > span"));
+//
+//	}
+	
+	
+	
+	public WebElement Moredetails_MarketingEnrich() {
+        return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+        	    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+        	    .findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
+        	    .findElement(By.cssSelector("[id^='app-dashboard-component-rs']")).getShadowRoot()
+        	    .findElement(By.cssSelector("rock-layout > rock-dashboard-widgets")).getShadowRoot()
+        	    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+        	    .findElement(By.cssSelector("#rock-my-todos")).getShadowRoot()
+        	    .findElement(By.cssSelector("[id^='rock-my-todos-component-rs']")).getShadowRoot()
+        	    .findElement(By.cssSelector("#rock-my-todos-tabs")).getShadowRoot()
+        	    .findElement(By.cssSelector("[id^='my-todo-summary-list-component-rs']")).getShadowRoot()
+        	    .findElement(By.cssSelector("pebble-list-view > pebble-list-item > my-todo-summary"));
+    }
+	
+	public WebElement ReadyForTransistion_Market_Enrich() {
+		return
+				driver.findElement(By.cssSelector("#app")).getShadowRoot()
+			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-dashboard-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("rock-layout > rock-dashboard-widgets")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#rock-my-todos")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-my-todos-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#rock-my-todos-tabs")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='my-todo-summary-list-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("pebble-list-view > pebble-list-item > my-todo-summary")).getShadowRoot()
+			    .findElement(By.cssSelector("#passedBCButton")).getShadowRoot()
+			    .findElement(By.cssSelector("#button-text-box"));
+	}
+	
+	
+	
 }
 
 //public void clickSearchButton() {
