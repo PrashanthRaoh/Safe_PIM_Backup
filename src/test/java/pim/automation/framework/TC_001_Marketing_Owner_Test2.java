@@ -22,29 +22,27 @@ import pages.HomePage;
 import pages.SearchPage2;
 
 public class TC_001_Marketing_Owner_Test2 extends BaseTest {
-
-	public ExtentTest test;
+//	public ExtentTest test;
 
 	@Test
 	public void Marketing_Owner() throws IOException, InterruptedException {
-		String className = this.getClass().getSimpleName();
-		System.out.println(className);
-
-		test = BaseTest.extentreport.createTest(this.getClass().getSimpleName());
+//		String className = this.getClass().getSimpleName();
+//		System.out.println(className);
+//		test = BaseTest.extentreport.createTest(this.getClass().getSimpleName());
 		homePage = new HomePage(driver);
 		SearchPage2 searchPage = new SearchPage2(driver);
 
 		utils.waitForElement(homePage.HomePage_SearchButton(), "clickable");
-		test.pass("Home Page is displayed");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Home Page is displayed");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(3000);
 		/**************************************************
 		 ***** Verify that logged in user is Marketing owner****************
 		 **************************************************/
 		WebElement currentloggedinuser = homePage.loggedin_User();
 		System.out.println("Logged in user is  " + currentloggedinuser.getText());
-		test.pass("Current user logged in is " + currentloggedinuser.getText());
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Current user logged in is " + currentloggedinuser.getText());
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		assertTrue("Logged-in user should be Marketing owner",currentloggedinuser.getText().contains("attributeownermarketing.test1"));
 
 		/// *************************************************
@@ -55,8 +53,8 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 		Thread.sleep(3000);
 		utils.waitForElement(searchPage.getgrid(), "clickable");
 		System.out.println("Search page grid displayed");
-		test.pass("Search page grid displayed");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Search page grid displayed");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		/**************************************************
 		 ***** Click on the filter and search for PIM Taxonomy in the search
@@ -66,20 +64,20 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 		System.out.println("Clicked on Filter button");
 		Thread.sleep(2000);
 		utils.waitForElement(searchPage.Search_MaterialType(), "clickable");
-		test.pass("Filter button Clicked");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Filter button Clicked");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		searchPage.ATO_Marketing_Enrichment_Buss_Condition_Filter().click();
 		Thread.sleep(2000);
 		searchPage.Failed_Buss_Condition().click();
 		Thread.sleep(2000);
 		searchPage.Apply_btn_FailedEnrichMarketing().click();
-		test.pass("Failed Enrich Marketing filter button applied");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Failed Enrich Marketing filter button applied");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(5000);
 		utils.waitForElement(searchPage.getgrid(), "clickable");
-		test.pass("Search page grid displayed after filter applied");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Search page grid displayed after filter applied");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		
 //		/**
 //		 * // /************************************************
@@ -100,8 +98,8 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
 
 		System.out.println("Total rows after entering the wide range filter criteria -- " + arrrowsdefined.size());
-		test.pass("Rows after entering 0s appeared");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Rows after entering 0s appeared");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		assertTrue("There should be results after applying filters", arrrowsdefined.size() > 0);
 
 		WebElement RowByRow = arrrowsdefined.get(0);
@@ -118,9 +116,9 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 		Thread.sleep(2000);
 		matidElement.click();
 		Thread.sleep(3000);
-		test.pass("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription
+		extentTest.pass("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription
 				+ " is selected for completion");
-		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		/*************************************************
 		 * --------- Capture % completion-It should be 0 ------ *
@@ -140,8 +138,8 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 		bussrule.getFirst().click();
 		Thread.sleep(4000);
 		utils.waitForElement(searchPage.shortDescription(), "clickable");
-		test.pass("Summary page of the material displayed");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Summary page of the material displayed");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		/*************************************************
 		 * --------- Enter mandatory fields to complete the transaction------- *
@@ -150,16 +148,16 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 		Thread.sleep(1000);
 		searchPage.LongDescription().sendKeys("This is long description");
 		Thread.sleep(1000);
-		test.pass("Entered mandatory field values on summary page");
-		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Entered mandatory field values on summary page");
+		extentTest.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		/*************************************************
 		 * --------- Save the transaction------- *
 		 ************************************************/
 		searchPage.SaveTransaction_btn().click();
 		Thread.sleep(8000);
-		test.pass("Saved the transaction");
-		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Saved the transaction");
+		extentTest.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		
 		/*************************************************
 		 * --------- Verify if Percentage completion is 100% ------- *
@@ -173,12 +171,12 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 		
 		if (percfullcompletion == 100) {
 //			Assert.assertEquals("The value should be 100", percfullcompletion == 100);
-			test.pass("Percentage completion is 100%");
-			test.log(Status.PASS,MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+			extentTest.pass("Percentage completion is 100%");
+			extentTest.log(Status.PASS,MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		} else {
 			Assert.assertEquals(percfullcompletion, 100, "% completion value is not 100");
-			test.fail("% completion value is not 100");
-			test.log(Status.FAIL,MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+			extentTest.fail("% completion value is not 100");
+			extentTest.log(Status.FAIL,MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		}
 		
 		/*************************************************
@@ -187,8 +185,8 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 		searchPage.Search_things_BreadCrum().click();
 		Thread.sleep(2000);
 		utils.waitForElement(searchPage.getgrid(), "clickable");
-		test.pass("Navigated back to search thing ");
-		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		extentTest.pass("Navigated back to search thing ");
+		extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		
 		/*************************************************
 		 * --------- Verify the record again in the search thing. It should not be listed ------- *
@@ -205,8 +203,8 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 			int zerorows = Integer.parseInt(result);
 			System.out.println(zerorows);
 			Assert.assertEquals(zerorows, 0 );
-			test.pass(matid + " completion is 100%. Hence not visible");
-			test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+			extentTest.pass(matid + " completion is 100%. Hence not visible");
+			extentTest.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		} catch (Exception e) {
 			WebElement rowsredefined2 = driver.findElement(By.cssSelector("#app")).getShadowRoot()
@@ -223,14 +221,10 @@ public class TC_001_Marketing_Owner_Test2 extends BaseTest {
 
 			if (arrrowsdefined2.size() > 0) {
 				System.out.println("Records found for the search criteria");
-				test.pass(matid + " completion is NOT 100%. Pleaes verify");
-				test.log(Status.FAIL, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+				extentTest.pass(matid + " completion is NOT 100%. Pleaes verify");
+				extentTest.log(Status.FAIL, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 			}
 		}
-		
-		
-
 	}
-
 }
