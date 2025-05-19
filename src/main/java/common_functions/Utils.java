@@ -76,7 +76,10 @@ public class Utils extends BaseTest {
 //			throw new RuntimeException("waitForElement failed: " + e.getMessage(), e);
 //		}
 //	}
-	
+	/*
+		Updated code
+		*/
+
 	public WebElement waitForElement(Supplier<WebElement> elementSupplier, String conditionType) {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 	    final Exception[] lastException = {null}; // Track last exception for reporting
