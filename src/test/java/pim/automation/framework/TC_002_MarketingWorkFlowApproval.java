@@ -35,11 +35,11 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		homePage = new HomePage(driver);
 		SearchPage2 searchPage = new SearchPage2(driver);
 
-//		utils.waitForElement(homePage.HomePage_SearchButton(), "clickable");
 		utils.waitForElement(() -> homePage.enrichMarketingAttributelink(), "clickable");
 		test.pass("Home Page is displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(3000);
+		
 ////		/**************************************************
 ////		 ***** Verify that logged in user is Marketing owner****************
 ////		 **************************************************/
@@ -51,12 +51,9 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 				currentloggedinuser.getText().contains("attributeownermarketing.test1"));
 		Thread.sleep(5000);
 
-		/*
-		 * /************************************************** 
-		 * Click on Marketing Enrichment in workflow **************** ////
-		 * **************************************************
-		 */
-
+		/**************************************************
+		 ***** Click on Marketing Enrichment in workflow ****
+		 **************************************************/
 		WebElement detailsEnrichment = homePage.Moredetails_MarketingEnrich().getShadowRoot()
 				.findElement(By.cssSelector("#viewDetails > span"));
 		detailsEnrichment.click();
@@ -103,8 +100,8 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
 
 		/*
-		 * // /************************************************ --------- Click on the
-		 * materialid from the result------- *
+		 * // /************************************************ --------- 
+		 * Click on the materialid from the result------- *
 		 ************************************************/
 		WebElement matidElement = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']"));
 		actions.moveToElement(RowByRow).build().perform();
