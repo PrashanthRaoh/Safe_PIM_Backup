@@ -2,24 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-03-19T17:14:26 IST" name="Default suite" finished-at="2025-03-19T17:17:08 IST" duration-ms="162053">
+  <suite started-at="2025-05-16T16:28:45 IST" name="Suite" finished-at="2025-05-16T16:29:50 IST" duration-ms="64960">
     <groups>
     </groups>
-    <test started-at="2025-03-19T17:14:26 IST" name="Default test" finished-at="2025-03-19T17:17:08 IST" duration-ms="162053">
-      <class name="pim.automation.framework.TC_001_Marketing_Owner">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:pim.automation.framework.TC_001_Marketing_Owner@6221a451]" started-at="2025-03-19T17:14:26 IST" name="setUp" finished-at="2025-03-19T17:14:34 IST" duration-ms="8811" status="PASS">
+    <test started-at="2025-05-16T16:28:45 IST" name="BSAPIE Owner" finished-at="2025-05-16T16:29:50 IST" duration-ms="64960">
+      <class name="pim.automation.framework.TC_003_BSAPIE_Test">
+        <test-method is-config="true" signature="intitializeReport()[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:28:45 IST" name="intitializeReport" finished-at="2025-05-16T16:28:45 IST" duration-ms="667" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- intitializeReport -->
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:28:45 IST" name="setUp" finished-at="2025-05-16T16:28:57 IST" duration-ms="11369" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[BSAPIEowner]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="Marketing_Owner()[pri:0, instance:pim.automation.framework.TC_001_Marketing_Owner@6221a451]" started-at="2025-03-19T17:14:34 IST" name="Marketing_Owner" finished-at="2025-03-19T17:17:05 IST" duration-ms="151056" status="PASS">
+        <test-method signature="BSAPIEOwner()[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:28:57 IST" name="BSAPIEOwner" finished-at="2025-05-16T16:29:50 IST" duration-ms="53547" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Marketing_Owner -->
-        <test-method is-config="true" signature="teardown()[pri:0, instance:pim.automation.framework.TC_001_Marketing_Owner@6221a451]" started-at="2025-03-19T17:17:05 IST" name="teardown" finished-at="2025-03-19T17:17:08 IST" duration-ms="2127" status="PASS">
+        </test-method> <!-- BSAPIEOwner -->
+        <test-method is-config="true" signature="publishReport()[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:29:50 IST" name="publishReport" finished-at="2025-05-16T16:29:52 IST" duration-ms="1870" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- teardown -->
-      </class> <!-- pim.automation.framework.TC_001_Marketing_Owner -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- publishReport -->
+      </class> <!-- pim.automation.framework.TC_003_BSAPIE_Test -->
+    </test> <!-- BSAPIE Owner -->
+  </suite> <!-- Suite -->
 </testng-results>

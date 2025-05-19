@@ -1,6 +1,5 @@
 package common_functions;
 
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import java.awt.Desktop;
@@ -19,12 +18,14 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import com.beust.jcommander.Parameter;
 
 import pages.HomePage;
 import pages.Login_Page;
@@ -34,7 +35,7 @@ public class BaseTest {
 	public static Utils utils;
 	public static Login_Page loginPage;
 	public HomePage homePage;
-	public  ExtentReports extentreport;
+	public static ExtentReports extentreport;
 	protected  static ExtentTest extentTest;
 	public static final String filepathname = "target/PIM_Report.html";
 
@@ -55,36 +56,39 @@ public class BaseTest {
 //		.assignCategory("Regression")
 //		.assignDevice(System.getenv("COMPUTERNAME"));
 		
-		extentTest = extentreport.createTest("PIM Automation Test Suite")
-                  .assignAuthor(System.getProperty("user.name"))
-                  .assignCategory("Regression")
-                  .assignDevice(System.getenv("COMPUTERNAME"));
+//		extentTest = extentreport.createTest("PIM Automation Test Suite")
+//                  .assignAuthor(System.getProperty("user.name"))
+//                  .assignCategory("Regression")
+//                  .assignDevice(System.getenv("COMPUTERNAME"));
 	}
 	
 	@AfterSuite
 	public void publishReport() throws IOException {
 		extentreport.flush();
-		driver.quit();
+//		driver.quit();
 		Desktop.getDesktop().browse(new File(filepathname).toURI());
 	}
 
+	@Parameters("UseCaseOwner")
 	@BeforeClass
-	public void setUp() throws IOException {
+	public void setUp(String UseCaseOwner) throws IOException {
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
 		driver.manage().window().maximize();
 		utils = new Utils(driver);
 		loginPage = new Login_Page(driver);
-		loginPage.LogintoPIM();
+		loginPage.LogintoPIM(UseCaseOwner);
 		homePage = new HomePage(driver);
 	}
 	
-//	@AfterTest
+//	@AfterClass
 	public void Logout() throws InterruptedException {
 		homePage.AppHeader_Administrator().click();
 		Thread.sleep(1000);
 		homePage.Logout_btn().click();
 		WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(15));
 		wait3.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("[id='username']"))));
+		Thread.sleep(2000);
+		driver.quit();
 	}
 }

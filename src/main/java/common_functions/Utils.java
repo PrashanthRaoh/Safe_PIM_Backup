@@ -5,39 +5,137 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.concurrent.TimeoutException;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.NoSuchElementException;
+import java.util.function.Supplier;
+import com.aventstack.extentreports.MediaEntityBuilder;
 
 public class Utils extends BaseTest {
 //	private WebDriverWait wait;
 
 	private WebDriver driver;
-	WebDriverWait wait;
+	public WebDriverWait wait;
+ final Exception[] lastException = {null};
 
 	public Utils(WebDriver driver) {
 		this.driver = driver;
 	}
 
 //	 Generic wait function
-	public WebElement waitForElement(WebElement element, String conditionType) {
+//	public WebElement waitForElement(WebElement element, String conditionType) {
+//		try {
+//			switch (conditionType.toLowerCase()) {
+//			case "clickable":
+//				wait.until(driver -> {
+//					try {
+//						return element.isDisplayed() && element.isEnabled();
+//					} catch (StaleElementReferenceException | NoSuchElementException ex) {
+//						return false;
+//					}
+//				});
+//				return element;
+//			case "visible":
+//				wait.until(driver -> {
+//					try {
+//						return element.isDisplayed();
+//					} catch (StaleElementReferenceException | NoSuchElementException ex) {
+//						return false;
+//					}
+//				});
+//				return element;
+//			case "invisibility":
+//				wait.until(driver -> {
+//					try {
+//						return !element.isDisplayed();
+//					} catch (StaleElementReferenceException | NoSuchElementException ex) {
+//						return true;
+//					}
+//				});
+//				return null;
+//			default:
+//				throw new IllegalArgumentException("Invalid wait condition type: " + conditionType);
+//			}
+//		} catch (Exception e) {
+//			try {
+//				String screenshotPath = Takescreenshot(driver);
+//				BaseTest.extentTest.fail("Element wait failed for condition: " + conditionType + " - " + e.getMessage(),
+//						MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+//			} catch (IOException io) {
+//				io.printStackTrace();
+//			}
+//			throw new RuntimeException("waitForElement failed: " + e.getMessage(), e);
+//		}
+//	}
+	
+	public WebElement waitForElement(Supplier<WebElement> elementSupplier, String conditionType) {
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-		switch (conditionType) {
-		case "clickable":
-			return wait.until(ExpectedConditions.elementToBeClickable(element));
-		case "visible":
-			return wait.until(ExpectedConditions.visibilityOf(element));
-		case "invisibility":
-			wait.until(ExpectedConditions.invisibilityOf(element));
-			return null;
-		default:
-			throw new IllegalArgumentException("Invalid wait condition type: " + conditionType);
-		}
+	    final Exception[] lastException = {null}; // Track last exception for reporting
+
+	    try {
+	        switch (conditionType.toLowerCase()) {
+	            case "clickable": {
+	                return wait.until(driver -> {
+	                    try {
+	                        WebElement el = elementSupplier.get();
+	                        if (el.isDisplayed() && el.isEnabled()) {
+	                            return el;
+	                        }
+	                    } catch (StaleElementReferenceException | NoSuchElementException e) {
+	                        lastException[0] = e;
+	                    }
+	                    return null;
+	                });
+	            }
+
+	            case "visible": {
+	                return wait.until(driver -> {
+	                    try {
+	                        WebElement el = elementSupplier.get();
+	                        if (el.isDisplayed()) {
+	                            return el;
+	                        }
+	                    } catch (StaleElementReferenceException | NoSuchElementException e) {
+	                        lastException[0] = e;
+	                    }
+	                    return null;
+	                });
+	            }
+
+	            case "invisibility": {
+	                wait.until(driver -> {
+	                    try {
+	                        return !elementSupplier.get().isDisplayed();
+	                    } catch (StaleElementReferenceException | NoSuchElementException e) {
+	                        return true;
+	                    }
+	                });
+	                return null;
+	            }
+
+	            default:
+	                throw new IllegalArgumentException("Invalid wait condition type: " + conditionType);
+	        }
+
+	    } catch (Exception e) {
+	        try {
+	            String screenshotPath = Takescreenshot(driver);
+	            BaseTest.extentTest.fail("Unexpected error while waiting for element: " + e.getMessage(),
+	                    MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+	        } catch (IOException io) {
+	            io.printStackTrace();
+	        }
+	        throw new RuntimeException("Unexpected error in waitForElement: " + e.getMessage(), e);
+	    }
 	}
 
 	public static String Takescreenshot(WebDriver driver) throws IOException {

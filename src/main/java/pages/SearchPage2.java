@@ -175,8 +175,7 @@ public class SearchPage2 {
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
-				.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
-				.findElement(By.cssSelector("#rockTabs"))
+				.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot().findElement(By.cssSelector("#rockTabs"))
 				.getShadowRoot().findElement(By.cssSelector("[id^='rock-entity-summary-component-rs']")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
 				.findElement(By.cssSelector("#rock-entity-tofix")).getShadowRoot()
@@ -239,23 +238,20 @@ public class SearchPage2 {
 
 	public WebElement SaveTransaction_btn() {
 		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
-			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
-			    .findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
-			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
-			    .findElement(By.cssSelector(".base-grid-structure"))
-			    .findElement(By.cssSelector(".base-grid-structure-child-2"))
-			    .findElement(By.cssSelector("#tab-content"))
-			    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
-			    .findElement(By.cssSelector(".base-grid-structure"))
-			    .findElement(By.cssSelector(".base-grid-structure-child-2 > #wizard-container > .base-grid-structure-child-2 > div > .base-grid-structure-child-2 > #step-container-manage > rock-attribute-split-screen"))
-			    .getShadowRoot()
-			    .findElement(By.cssSelector(".attribute-split-screen-container > .base-grid-structure"))
-			    .findElement(By.cssSelector(".base-grid-structure-child-2"))
-			    .findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
-			    .findElement(By.cssSelector("#buttonContainer"))
-			    .findElement(By.cssSelector("#next"));
+				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot().findElement(By.cssSelector("#rockTabs"))
+				.getShadowRoot().findElement(By.cssSelector(".base-grid-structure"))
+				.findElement(By.cssSelector(".base-grid-structure-child-2")).findElement(By.cssSelector("#tab-content"))
+				.findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector(".base-grid-structure"))
+				.findElement(By.cssSelector(
+						".base-grid-structure-child-2 > #wizard-container > .base-grid-structure-child-2 > div > .base-grid-structure-child-2 > #step-container-manage > rock-attribute-split-screen"))
+				.getShadowRoot().findElement(By.cssSelector(".attribute-split-screen-container > .base-grid-structure"))
+				.findElement(By.cssSelector(".base-grid-structure-child-2"))
+				.findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+				.findElement(By.cssSelector("#buttonContainer")).findElement(By.cssSelector("#next"));
 
 	}
 
@@ -324,5 +320,42 @@ public class SearchPage2 {
 				.findElement(By.cssSelector("#entityGrid")).getShadowRoot().findElement(By
 						.cssSelector("#gridHeader > div.grid-actions.row > span.text-ellipsis.m-r-5.m-l-5.page-range"));
 
+	}
+
+	/*******************************
+	 * Work flow block on right panel
+	 *******************************/
+	public WebElement Workflowblocksameelement() {
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#entityManageSidebar")).getShadowRoot()
+				.findElement(By.cssSelector("#sidebarTabs")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-workflow-panel-component-rs']"));
+	}
+
+	public WebElement AssignUser() {
+		return Workflowblocksameelement().getShadowRoot()
+				.findElement(By.cssSelector("#stepComments-enrichmarketingattributes")).getShadowRoot()
+				.findElement(By.cssSelector("#textarea")).getShadowRoot().findElement(By.cssSelector("#input-1"))
+				.getShadowRoot().findElement(By.cssSelector("#textarea"));
+	}
+
+	public WebElement Done_Button() {
+		return Workflowblocksameelement().getShadowRoot()
+				.findElement(By.cssSelector("#action-button-done")).getShadowRoot()
+				.findElement(By.cssSelector("#buttonTextBox"));
+	}
+
+	public WebElement Spinner() {
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#pebbleAppToast")).getShadowRoot()
+				.findElement(By.cssSelector("div > div:nth-child(1)"));
+	}
+	
+	public WebElement Actionworkflow_Message() {
+		return  Workflowblocksameelement().getShadowRoot().findElement(By.cssSelector("#workflowPanelMessage"));
 	}
 }

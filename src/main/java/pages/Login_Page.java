@@ -56,9 +56,10 @@ public class Login_Page  {
 		return val;
     }
     
-	public void LogintoPIM() throws IOException {
+	public void LogintoPIM(String UseCaseOwner) throws IOException {
 		LaunchSite();
-		String credentials = getProperty("OwnerMarketing");
+//		String credentials = getProperty("OwnerMarketing");
+		String credentials = getProperty(UseCaseOwner);
 		String[] abc = credentials.split(",");
 		System.out.println("Username: " + abc[0]);
 		System.out.println("Password: " + abc[1]);

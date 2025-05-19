@@ -3,13 +3,15 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="pim.automation.framework.TC_001_Marketing_Owner">
+      <class name="pim.automation.framework.TC_002_MarketingWorkFlowApproval">
         <methods>
-          <include name="Marketing_Owner"/>
           <include name="setUp"/>
-          <include name="teardown"/>
+          <include name="Logout"/>
+          <include name="MarketingWorkFlowApproval"/>
+          <include name="intitializeReport"/>
+          <include name="publishReport"/>
         </methods>
-      </class> <!-- pim.automation.framework.TC_001_Marketing_Owner -->
+      </class> <!-- pim.automation.framework.TC_002_MarketingWorkFlowApproval -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
