@@ -3,7 +3,8 @@
 
 
 <suite name="Suite">
-<!--
+
+<!-- 
 	<test name="MarketingTests_OwnerMarketing">
 		<parameter name="UseCaseOwner" value="OwnerMarketing" />
 		<classes>
@@ -11,9 +12,8 @@
 			<class name="pim.automation.framework.TC_002_MarketingWorkFlowApproval" />
 		</classes>
 	</test>
--->
 
-
+ -->
 	<test name="BSAPIE Owner">
 		<parameter name="UseCaseOwner" value="BSAPIEowner" />
 		<classes>
