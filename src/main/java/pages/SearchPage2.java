@@ -309,7 +309,6 @@ public class SearchPage2 {
 						"div > div > span.breadcrumb-link.flex-nowrap.item-2 > span.breadcrumb-data.text-ellipsis > span.subtitle"));
 
 	}
-
 	public WebElement rowsdisplayedtext() {
 		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()

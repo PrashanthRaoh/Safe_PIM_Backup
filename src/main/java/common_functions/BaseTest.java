@@ -50,22 +50,11 @@ public class BaseTest {
 		sparkReporter.config().setTheme(Theme.DARK);
 		sparkReporter.config().setDocumentTitle("PIM Automation Report");
 		extentreport.attachReporter(sparkReporter);
-//		
-//		extentreport.createTest(this.getClass().getSimpleName())
-//		.assignAuthor(System.getProperty("user.name"))
-//		.assignCategory("Regression")
-//		.assignDevice(System.getenv("COMPUTERNAME"));
-		
-//		extentTest = extentreport.createTest("PIM Automation Test Suite")
-//                  .assignAuthor(System.getProperty("user.name"))
-//                  .assignCategory("Regression")
-//                  .assignDevice(System.getenv("COMPUTERNAME"));
 	}
 	
 	@AfterSuite
 	public void publishReport() throws IOException {
 		extentreport.flush();
-//		driver.quit();
 		Desktop.getDesktop().browse(new File(filepathname).toURI());
 	}
 
@@ -89,6 +78,6 @@ public class BaseTest {
 		WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(15));
 		wait3.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("[id='username']"))));
 		Thread.sleep(2000);
-		driver.quit();
+//		driver.quit();
 	}
 }
