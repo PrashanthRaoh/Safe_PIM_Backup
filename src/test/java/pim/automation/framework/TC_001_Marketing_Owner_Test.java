@@ -64,8 +64,7 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 //////		/**************************************************
-//////		 ***** Click on the filter and search for PIM Taxonomy in the search
-//////		 * field****************
+//////		 ***** Click on the filter and search for PIM Taxonomy in the search field****************
 //////		 **************************************************/
 		searchPage.getFilterButton().click();
 		System.out.println("Clicked on Filter button");
