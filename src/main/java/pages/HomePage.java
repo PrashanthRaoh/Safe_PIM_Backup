@@ -270,35 +270,12 @@ public class HomePage {
 	}
 	
 	public WebElement Moredetails_MarketingEnrich() {
-//        return driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//        	    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//        	    .findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
-//        	    .findElement(By.cssSelector("[id^='app-dashboard-component-rs']")).getShadowRoot()
-//        	    .findElement(By.cssSelector("rock-layout > rock-dashboard-widgets")).getShadowRoot()
-//        	    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-//        	    .findElement(By.cssSelector("#rock-my-todos")).getShadowRoot()
-//        	    .findElement(By.cssSelector("[id^='rock-my-todos-component-rs']")).getShadowRoot()
-//        	    .findElement(By.cssSelector("#rock-my-todos-tabs")).getShadowRoot()
-//        	    .findElement(By.cssSelector("[id^='my-todo-summary-list-component-rs']")).getShadowRoot()
-//        	    .findElement(By.cssSelector("pebble-list-view > pebble-list-item > my-todo-summary"));
-		
 		return HomepageTabRootElement().getShadowRoot()
         	    .findElement(By.cssSelector("[id^='my-todo-summary-list-component-rs']")).getShadowRoot()
         	    .findElement(By.cssSelector("pebble-list-view > pebble-list-item > my-todo-summary"));
     }
 	
 	public WebElement ReadyForTransistion_Market_Enrich() {
-//		return
-//				driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='app-dashboard-component-rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("rock-layout > rock-dashboard-widgets")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("#rock-my-todos")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='rock-my-todos-component-rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("#rock-my-todos-tabs"))
-			    
 			    return HomepageTabRootElement().getShadowRoot()
 			    .findElement(By.cssSelector("[id^='my-todo-summary-list-component-rs']")).getShadowRoot()
 			    .findElement(By.cssSelector("pebble-list-view > pebble-list-item > my-todo-summary")).getShadowRoot()
@@ -307,16 +284,6 @@ public class HomePage {
 	}
 	
 	public WebElement sellablematerialtabelement() {
-//	 return driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//		    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//		    .findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
-//		    .findElement(By.cssSelector("[id^='app-dashboard-component-rs']")).getShadowRoot()
-//		    .findElement(By.cssSelector("rock-layout > rock-dashboard-widgets")).getShadowRoot()
-//		    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-//		    .findElement(By.cssSelector("#rock-my-todos")).getShadowRoot()
-//		    .findElement(By.cssSelector("[id^='rock-my-todos-component-rs']")).getShadowRoot()
-//		    .findElement(By.cssSelector("#rock-my-todos-tabs"))
-		    
 		 return HomepageTabRootElement().getShadowRoot()
 		    .findElement(By.cssSelector("[id^='my-todo-summary-list-component-rs']")).getShadowRoot()
 		    .findElement(By.cssSelector("pebble-list-view > pebble-list-item:nth-child(2) > my-todo-summary")).getShadowRoot()
@@ -324,16 +291,6 @@ public class HomePage {
 	}
 	
 	public WebElement BSAPIEUsecaseApprovalTab() {
-//		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
-//	    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//	    .findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
-//	    .findElement(By.cssSelector("[id^='app-dashboard-component-rs']")).getShadowRoot()
-//	    .findElement(By.cssSelector("rock-layout > rock-dashboard-widgets")).getShadowRoot()
-//	    .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-//	    .findElement(By.cssSelector("#rock-my-todos")).getShadowRoot()
-//	    .findElement(By.cssSelector("[id^='rock-my-todos-component-rs']")).getShadowRoot()
-//	    .findElement(By.cssSelector("#rock-my-todos-tabs"))
-	    
 		 return HomepageTabRootElement().getShadowRoot()
 	    .findElement(By.cssSelector("#tab-bsapieusecaseapproval"))
 	    .findElement(By.cssSelector("div"));

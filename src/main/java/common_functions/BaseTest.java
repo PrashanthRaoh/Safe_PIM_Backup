@@ -70,7 +70,7 @@ public class BaseTest {
 		homePage = new HomePage(driver);
 	}
 	
-//	@AfterClass
+	@AfterClass
 	public void Logout() throws InterruptedException {
 		homePage.AppHeader_Administrator().click();
 		Thread.sleep(1000);
@@ -78,6 +78,6 @@ public class BaseTest {
 		WebDriverWait wait3 = new WebDriverWait(driver, Duration.ofSeconds(15));
 		wait3.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("[id='username']"))));
 		Thread.sleep(2000);
-//		driver.quit();
+		driver.quit();
 	}
 }
