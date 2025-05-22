@@ -9,12 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SummaryPage {
 	private WebDriver driver;
-	//	private WebDriverWait wait;
 	private By searchInputField = By.cssSelector("#app");
 
 	public SummaryPage(WebDriver driver) {
 		this.driver = driver;
-		//		this.wait = new WebDriverWait(driver, Duration.ofSeconds(90));
 	}
 
 	public WebElement common_element() {
