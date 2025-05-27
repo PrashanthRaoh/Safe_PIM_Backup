@@ -51,7 +51,7 @@ public class TC_003_BSAPIE_Test extends BaseTest {
 		utils.waitForElement(() -> homePage.BSAPIEUsecaseApprovalTab(), "visible");
 
 		/**************************************************
-		 * ***** Verify that logged in user is Marketing owner**************** //
+		 * ***** Verify that logged in user is Marketing owner
 		 **************************************************/
 		Thread.sleep(5000);
 		homePage.BSAPIEUsecaseApprovalTab().click();
@@ -60,8 +60,8 @@ public class TC_003_BSAPIE_Test extends BaseTest {
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(2000);
 
-		/*************************************** ***** 
-		 * Get number of items under use case approvals ****
+		/******************************************** 
+		 * Get number of items under use case approvals 
 		 ***************************************/
 		List<WebElement> summaryElements = driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
@@ -104,7 +104,7 @@ public class TC_003_BSAPIE_Test extends BaseTest {
 		test.pass("BSA PIE Use case Approval entities listed ");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		
-		/*  ************************************** ***** 
+		/*************************************** ***** 
 		 * Click on On Hold - BSA PIE(Rule Triggered) ****
 		 ***************************************/
 		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
@@ -161,7 +161,6 @@ public class TC_003_BSAPIE_Test extends BaseTest {
 		summaryPage.SearchInputfield().sendKeys("hold");
 		Thread.sleep(1500);
 		actions2.moveToElement(summaryPage.SearchInputfield()).sendKeys(Keys.ENTER).build().perform();
-//		summaryPage.SearchInputfield().sendKeys(Keys.ENTER);
 		Thread.sleep(3000);
 		utils.waitForElement(() -> summaryPage.SystemAttributes(), "visible");
 		test.pass("System attributes elemets shown up");

@@ -37,14 +37,14 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		homePage = new HomePage(driver);
 		SearchPage2 searchPage = new SearchPage2(driver);
 		Thread.sleep(5000);
-		utils.waitForElement(()->homePage.enrichMarketingAttributelink(), "clickable");
+		utils.waitForElement(() -> homePage.enrichMarketingAttributelink(), "clickable");
 		test.pass("Home Page is displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(3000);
-		
-////		/**************************************************
-////		 ***** Verify that logged in user is Marketing owner****************
-////		 **************************************************/
+
+		/**************************************************
+		 ***** Verify that logged in user is Marketing owner****************
+		 **************************************************/
 		WebElement currentloggedinuser = homePage.loggedin_User();
 		System.out.println("Logged in user is  " + currentloggedinuser.getText());
 		test.pass("Current user logged in is " + currentloggedinuser.getText());
@@ -52,24 +52,24 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		assertTrue("Logged-in user should be Marketing owner",
 				currentloggedinuser.getText().contains("attributeownermarketing.test1"));
 
-//////		/// *************************************************
-////////		 *    ------- Click on Marketing enrichment link in my todos ---------  *
-////////		 ************************************************/
+		/***************************************
+		 * ------- Click on Marketing enrichment link in my todos --------- *
+		 *************************************************/
 		homePage.enrichMarketingAttributelink().click();
 		System.out.println("Clicked on Marketing Enrich link");
 		Thread.sleep(3000);
-		utils.waitForElement(()-> searchPage.getgrid(), "clickable");
+		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
 		System.out.println("Search page grid displayed");
 		test.pass("Search page grid displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
-//////		/**************************************************
-//////		 ***** Click on the filter and search for PIM Taxonomy in the search field****************
-//////		 **************************************************/
+//		/**************************************************
+//		 ***** Click on the filter and search for PIM Taxonomy in the search field****************
+//		 **************************************************/
 		searchPage.getFilterButton().click();
 		System.out.println("Clicked on Filter button");
 		Thread.sleep(2000);
-		utils.waitForElement(()->searchPage.Search_MaterialType(), "clickable");
+		utils.waitForElement(() -> searchPage.Search_MaterialType(), "clickable");
 		test.pass("Filter button Clicked");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
@@ -81,14 +81,14 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		test.pass("Failed Enrich Marketing filter button applied");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(5000);
-		utils.waitForElement(()->searchPage.getgrid(), "clickable");
+		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
 		test.pass("Search page grid displayed after filter applied");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-	
-////////		/**
-////////		 * // /************************************************
-////////		 *  --------- Get Row count------- *
-////////		 ********************************************************/
+
+		/**
+		 * // /************************************************ --------- Get Row
+		 * count------- *
+		 ********************************************************/
 		Actions actions = new Actions(driver);
 		WebElement rowsredefined = driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
@@ -114,20 +114,19 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		String matid = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']")).getText();
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
 
-////////		/*
-////////		 * // /************************************************ 
-////////		 * --------- Click on the materialid from the result------- *
-////////		 ************************************************/
+		/*************************************************
+		 * --------- Click on the materialid from the result------- *
+		 ************************************************/
 		WebElement matidElement = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']"));
 		actions.moveToElement(RowByRow).build().perform();
 		Thread.sleep(2000);
 		matidElement.click();
 		Thread.sleep(3000);
-		
-////		/*************************************************
-////		 * --------- Capture % completion-It should be 0 ------ *
-////		 ************************************************/
-		utils.waitForElement(()->searchPage.ProgressRing(), "visible");
+
+		/*************************************************
+		 * --------- Capture % completion-It should be 0 ------ *
+		 ************************************************/
+		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
 		String percentagecompletion = searchPage.ProgressRing().getText();
 		System.out.println("Percentage completion of " + matid + " is " + percentagecompletion + " % ");
 		test.pass("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription
@@ -138,18 +137,18 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		System.out.println("There are  " + bussrule.size() + " bussrule");
 		Assert.assertEquals(bussrule.size(), 1, "The size of bussrule should be 1");
 
-//////		/*************************************************
-//////		 * --------- Click on the Marketing enrichment business rule------- *
-//////		 ************************************************/
+//		/*************************************************
+//		 * --------- Click on the Marketing enrichment business rule------- *
+//		 ************************************************/
 		bussrule.getFirst().click();
 		Thread.sleep(4000);
-		utils.waitForElement(()->searchPage.shortDescription(), "clickable");
+		utils.waitForElement(() -> searchPage.shortDescription(), "clickable");
 		test.pass("Summary page of the material displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
-//////		/*************************************************
-//////		 * --------- Enter mandatory fields to complete the transaction------- *
-//////		 ************************************************/
+//		/*************************************************
+//		 * --------- Enter mandatory fields to complete the transaction------- *
+//		 ************************************************/
 		searchPage.shortDescription().sendKeys("Short description to complete transaction");
 		Thread.sleep(1000);
 		searchPage.LongDescription().sendKeys("This is long description");
@@ -157,18 +156,18 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		test.pass("Entered mandatory field values on summary page");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
-//////		/*************************************************
-//////		 * --------- Save the transaction------- *
-//////		 ************************************************/
+//		/*************************************************
+//		 * --------- Save the transaction------- *
+//		 ************************************************/
 		searchPage.SaveTransaction_btn().click();
 		Thread.sleep(8000);
 		test.pass("Saved the transaction");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-////		
-////		/*************************************************
-////		 * --------- Verify if Percentage completion is 100% ------- *
-////		 ************************************************/
-		utils.waitForElement(()->searchPage.ProgressRing(), "visible");
+
+		/*************************************************
+		 * --------- Verify if Percentage completion is 100% ------- *
+		 ************************************************/
+		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
 		String percentagecompletion2 = searchPage.ProgressRing().getText();
 		System.out.println("Percentage completion is now " + percentagecompletion2);
 
@@ -184,19 +183,20 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 			test.fail("% completion value is not 100");
 			test.log(Status.FAIL, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		}
-////		
-////		/*************************************************
-////		 * --------- Click on the search thing bread crum ------- *
-////		 ************************************************/
+
+		/*************************************************
+		 * --------- Click on the search thing bread crum ------- *
+		 ************************************************/
 		searchPage.Search_things_BreadCrum().click();
 		Thread.sleep(2000);
-		utils.waitForElement(()->searchPage.getgrid(), "clickable");
+		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
 		test.pass("Navigated back to search thing ");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-		
-////		/*************************************************
-////		 * --------- Verify the record again in the search thing. It should not be listed ------- *
-////		 ************************************************/
+
+		/*************************************************
+		 * --------- Verify the record again in the search thing. It should not be
+		 * listed ------- *
+		 ************************************************/
 		searchPage.searchthingdomain_Input_Mat_Id().click();
 		searchPage.searchthingdomain_Input_Mat_Id().clear();
 		searchPage.searchthingdomain_Input_Mat_Id().sendKeys(matid);
