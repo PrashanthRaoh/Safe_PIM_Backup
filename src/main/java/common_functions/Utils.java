@@ -115,8 +115,6 @@ public class Utils extends BaseTest {
 
 
 
-
-
 ///	 Generic wait function
 //public WebElement waitForElement(WebElement element, String conditionType) {
 //	try {
