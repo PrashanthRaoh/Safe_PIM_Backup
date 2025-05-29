@@ -12,7 +12,6 @@ public class SearchPage2 {
 	private WebDriver driver;
 	private WebDriverWait wait;
 
-	// Locators
 	private By searchInputField = By.cssSelector("#app");
 	private By rowsLocator = By.cssSelector("#app");
 	private By filterButtonLocator = By.cssSelector("#filterButton");
@@ -216,17 +215,6 @@ public class SearchPage2 {
 	}
 
 	public WebElement LongDescription() {
-//		return driver.findElement(searchInputField).getShadowRoot().findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
-//			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
-//			    .findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
-//			    .findElement(By.cssSelector("#rock-attribute-list-container > rock-attribute-list")).getShadowRoot()
-//			    .findElement(By.cssSelector("div > div > div > pebble-accordion > div > div"))
-
 		return similarElementforInput_Summary()
 				.findElement(By.cssSelector(
 						".attribute-box.attribute-box-2-by-3.textarea.overflow-hidden[name='longdescription']"))

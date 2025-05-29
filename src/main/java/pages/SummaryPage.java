@@ -101,7 +101,6 @@ public class SummaryPage {
 			    .getShadowRoot().findElement(By.cssSelector(".d-flex"))
 			    .findElement(By.cssSelector("pebble-tags"))
 			    .getShadowRoot().findElement(By.cssSelector(".container"));
-
 	}
 
 	public WebElement HomeBreadcrum() {
