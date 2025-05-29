@@ -26,6 +26,7 @@ import com.aventstack.extentreports.Status;
 
 import common_functions.BaseTest;
 import common_functions.Utils;
+import pages.DigitalAsset;
 import pages.HomePage;
 import pages.SearchPage2;
 import pages.SummaryPage;
@@ -33,7 +34,7 @@ import pages.SummaryPage;
 public class TC_003_BSAPIE_Test extends BaseTest {
 	public ExtentTest test;
 
-	@Test
+	@Test(groups = {"BSAPIEowner"})
 	public void BSAPIEOwner() throws InterruptedException, IOException {
 		String className = this.getClass().getSimpleName();
 		System.out.println(className);
@@ -239,10 +240,8 @@ public class TC_003_BSAPIE_Test extends BaseTest {
 				break;
 			}
 		}
-		
 		/********************************
-		 * Waiting for On Hold - BSA PIE (User Selected) 
-		 * tab to check material availability
+		 * Waiting for On Hold - BSA PIE (User Selected) tab to check material availability
 		 ********************************/
 		utils.waitForElement(() -> searchPage.searchthingdomain_Input_Mat_Id(), "clickable");
 		test.pass("Search page grid displayed after clicking on On Hold - BSA PIE");

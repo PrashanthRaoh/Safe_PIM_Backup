@@ -24,7 +24,7 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 
 	public ExtentTest test;
 
-	@Test
+	@Test()
 	public void MarketingWorkFlowApproval() throws InterruptedException, IOException {
 		String className = this.getClass().getSimpleName();
 		System.out.println(className);
@@ -40,9 +40,9 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(3000);
 		
-////		/**************************************************
-////		 ***** Verify that logged in user is Marketing owner****************
-////		 **************************************************/
+		/**************************************************
+		 ***** Verify that logged in user is Marketing owner****************
+		 **************************************************/
 		WebElement currentloggedinuser = homePage.loggedin_User();
 		System.out.println("Logged in user is  " + currentloggedinuser.getText());
 		test.pass("Current user logged in is " + currentloggedinuser.getText());
@@ -73,7 +73,6 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		/**************************************************
 		 ***** Click on any one of the entity****
 		 **************************************************/
-		
 		Actions actions = new Actions(driver);
 		WebElement rowsredefined = driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
@@ -99,8 +98,7 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		String matid = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']")).getText();
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
 
-		/*
-		 * // /************************************************ --------- 
+		/************************************************** --------- 
 		 * Click on the materialid from the result------- *
 		 ************************************************/
 		WebElement matidElement = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']"));
@@ -123,8 +121,9 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		Thread.sleep(8000);
 
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
-		//// Get action workflow compelte msg
+		/***********************************
+		 *  Get action workflow compelte msg
+		 ***********************************/		
 		wait.until(ExpectedConditions.visibilityOf(searchPage.Actionworkflow_Message()));
 		String workflowMsg = searchPage.Actionworkflow_Message().getText();
 		System.out.println("Workflow message is " + workflowMsg);
@@ -142,15 +141,14 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		/*************************************************
-		 * --------- Verify the record again in the search thing. It should not be
-		 * listed ------- *
+		 * --------- Verify the record again in the search thing. It should not be listed ------- *
 		 ************************************************/
 		searchPage.searchthingdomain_Input_Mat_Id().click();
 		searchPage.searchthingdomain_Input_Mat_Id().clear();
 		searchPage.searchthingdomain_Input_Mat_Id().sendKeys(matid);
 		searchPage.searchthingdomain_Input_Mat_Id().sendKeys(Keys.ENTER);
 		Thread.sleep(5000);
-//////
+
 		try {
 			String txt = searchPage.rowsdisplayedtext().getText();
 			String result = txt.split(" / ")[1];

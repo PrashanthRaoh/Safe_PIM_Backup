@@ -26,7 +26,7 @@ import pages.SearchPage2;
 public class TC_001_Marketing_Owner_Test extends BaseTest {
 	public ExtentTest test;
 
-	@Test
+	@Test()
 	public void Marketing_Owner() throws IOException, InterruptedException {
 		String className = this.getClass().getSimpleName();
 		System.out.println(className);
