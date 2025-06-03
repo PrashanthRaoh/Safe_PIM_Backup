@@ -63,9 +63,9 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		test.pass("Search page grid displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
-//		/**************************************************
-//		 ***** Click on the filter and search for PIM Taxonomy in the search field****************
-//		 **************************************************/
+		/**************************************************
+		 ***** Click on the filter and search for PIM Taxonomy in the search field****************
+		 **************************************************/
 		searchPage.getFilterButton().click();
 		System.out.println("Clicked on Filter button");
 		Thread.sleep(2000);
@@ -85,9 +85,8 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		test.pass("Search page grid displayed after filter applied");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
-		/**
-		 * // /************************************************ --------- Get Row
-		 * count------- *
+		/************************************************** 
+		 * --------- Get Row count------- *
 		 ********************************************************/
 		Actions actions = new Actions(driver);
 		WebElement rowsredefined = driver.findElement(By.cssSelector("#app")).getShadowRoot()

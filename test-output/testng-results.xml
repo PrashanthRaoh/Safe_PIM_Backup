@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-05-16T16:28:45 IST" name="Suite" finished-at="2025-05-16T16:29:50 IST" duration-ms="64960">
+  <suite started-at="2025-06-03T13:33:10 IST" name="Suite" finished-at="2025-06-03T13:36:08 IST" duration-ms="178154">
     <groups>
     </groups>
-    <test started-at="2025-05-16T16:28:45 IST" name="BSAPIE Owner" finished-at="2025-05-16T16:29:50 IST" duration-ms="64960">
-      <class name="pim.automation.framework.TC_003_BSAPIE_Test">
-        <test-method is-config="true" signature="intitializeReport()[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:28:45 IST" name="intitializeReport" finished-at="2025-05-16T16:28:45 IST" duration-ms="667" status="PASS">
+    <test started-at="2025-06-03T13:33:10 IST" name="DigitalAssetOwner" finished-at="2025-06-03T13:36:08 IST" duration-ms="178154">
+      <class name="pim.automation.framework.TC_004_Digital_Asset">
+        <test-method is-config="true" signature="intitializeReport()[pri:0, instance:pim.automation.framework.TC_004_Digital_Asset@7ef82753]" started-at="2025-06-03T13:33:09 IST" name="intitializeReport" finished-at="2025-06-03T13:33:10 IST" duration-ms="560" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- intitializeReport -->
-        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:28:45 IST" name="setUp" finished-at="2025-05-16T16:28:57 IST" duration-ms="11369" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:pim.automation.framework.TC_004_Digital_Asset@7ef82753]" started-at="2025-06-03T13:33:10 IST" name="setUp" finished-at="2025-06-03T13:33:20 IST" duration-ms="9794" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[BSAPIEowner]]>
+                <![CDATA[DigitalAssetowner]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="BSAPIEOwner()[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:28:57 IST" name="BSAPIEOwner" finished-at="2025-05-16T16:29:50 IST" duration-ms="53547" status="PASS">
+        <test-method signature="DigitalAsset()[pri:0, instance:pim.automation.framework.TC_004_Digital_Asset@7ef82753]" started-at="2025-06-03T13:33:20 IST" name="DigitalAsset" finished-at="2025-06-03T13:36:08 IST" duration-ms="168313" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- BSAPIEOwner -->
-        <test-method is-config="true" signature="publishReport()[pri:0, instance:pim.automation.framework.TC_003_BSAPIE_Test@45099dd3]" started-at="2025-05-16T16:29:50 IST" name="publishReport" finished-at="2025-05-16T16:29:52 IST" duration-ms="1870" status="PASS">
+        </test-method> <!-- DigitalAsset -->
+        <test-method is-config="true" signature="publishReport()[pri:0, instance:pim.automation.framework.TC_004_Digital_Asset@7ef82753]" started-at="2025-06-03T13:36:08 IST" name="publishReport" finished-at="2025-06-03T13:36:10 IST" duration-ms="1989" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- publishReport -->
-      </class> <!-- pim.automation.framework.TC_003_BSAPIE_Test -->
-    </test> <!-- BSAPIE Owner -->
+      </class> <!-- pim.automation.framework.TC_004_Digital_Asset -->
+    </test> <!-- DigitalAssetOwner -->
   </suite> <!-- Suite -->
 </testng-results>

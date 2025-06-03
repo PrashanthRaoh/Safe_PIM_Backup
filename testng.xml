@@ -6,15 +6,27 @@
 	<test name="MarketingTests_OwnerMarketing">
 		<parameter name="UseCaseOwner" value="OwnerMarketing" />
 		<classes>
-			<class name="pim.automation.framework.TC_001_Marketing_Owner_Test" />
-			<class name="pim.automation.framework.TC_002_MarketingWorkFlowApproval" />
+			<class
+				name="pim.automation.framework.TC_001_Marketing_Owner_Test" />
+			<class
+				name="pim.automation.framework.TC_002_MarketingWorkFlowApproval" />
 		</classes>
 	</test>
-  -->
-	<test name="BSAPIE Owner">
+	
+	<test name="BSAPIEOwner">
 		<parameter name="UseCaseOwner" value="BSAPIEowner" />
 		<classes>
 			<class name="pim.automation.framework.TC_003_BSAPIE_Test" />
 		</classes>
 	</test>
+	
+	-->
+<test name="DigitalAssetOwner">
+		<parameter name="UseCaseOwner" value="DigitalAssetowner" />
+		<classes>
+			<class name="pim.automation.framework.TC_004_Digital_Asset" />
+		</classes>
+	</test>
+	
+
 </suite>

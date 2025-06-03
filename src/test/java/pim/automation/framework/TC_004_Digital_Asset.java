@@ -1,13 +1,12 @@
 package pim.automation.framework;
 
 import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -76,43 +75,50 @@ public class TC_004_Digital_Asset extends BaseTest {
 				.findElements(By.cssSelector("my-todo-detail-view-list-item"));
 
 		utils.waitForElement(() -> detailItems.get(0), "clickable");
-
 		System.out.println("There are " + detailItems.size() + " elements ");
 
-		List<String> expectedItems = Arrays.asList("Ready for transition",
-				"DAM: Review 2D Line Drawing", "DAM: Review Representative Image (Primary)","DAM: Review Secondary Image","DAM: Review Unclassified Images");
-
+		List<String> expectedItems = Arrays.asList("Ready for transition", "DAM: Review 2D Line Drawing","DAM: Review Representative Image (Primary)", "DAM: Review Secondary Image",
+				"DAM: Review Unclassified Images");
 		Assert.assertEquals(detailItems.size(), expectedItems.size(), "Item count mismatch");
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 
+		/**********************************************
+		 * Verify in which row DAM: Review 2D Line Drawing was found
+		**********************************************/
+		int matchedRowIndex = -1; 
 		for (int i = 0; i < detailItems.size(); i++) {
-			WebElement summary = detailItems.get(i);
-			WebElement innerDiv = summary.getShadowRoot().findElement(By.cssSelector("#button-text-box"));
-			String actualText = innerDiv.getAttribute("title").trim().replaceFirst("^\\d+\\s", "");
-			System.out.println("Item " + (i + 1) + ":--" + actualText);
-			Assert.assertEquals(actualText, expectedItems.get(i), "Mismatch at item " + (i + 1));
-
-			if (actualText.contains("DAM: Review 2D Line Drawing")) {
-				js.executeScript("arguments[0].scrollIntoView({block: 'center'});", innerDiv);
-				try {
-					innerDiv.click(); 
-				} catch (Exception e) {
-					js.executeScript("arguments[0].click();", innerDiv);
-				}
-				Thread.sleep(5000);
-				break;
-			}
+		    WebElement summary = detailItems.get(i);
+		    WebElement innerDiv = summary.getShadowRoot().findElement(By.cssSelector("#button-text-box"));
+		    String actualText = innerDiv.getAttribute("title").trim().replaceFirst("^\\d+\\s", "");
+		    System.out.println("Item " + (i + 1) + ":--" + actualText);
+		    Assert.assertEquals(actualText, expectedItems.get(i), "Mismatch at item " + (i + 1));
+		    if (actualText.contains("DAM: Review 2D Line Drawing")) {
+		        matchedRowIndex = i + 1; // +1 to match human-readable row index
+		        js.executeScript("arguments[0].scrollIntoView({block: 'center'});", innerDiv);
+		        try {
+		            innerDiv.click();
+		        } catch (Exception e) {
+		            js.executeScript("arguments[0].click();", innerDiv);
+		        }
+		        Thread.sleep(5000);
+		        break;
+		    }
 		}
-		test.pass("Clicked on DAM: Review 2D Line Drawing ");
+
+		if (matchedRowIndex != -1) {
+		    System.out.println("Found 'DAM: Review 2D Line Drawing' in row: " + matchedRowIndex);
+		} else {
+		    System.out.println("'DAM: Review 2D Line Drawing' not found in any row.");
+		}
+		test.pass("Clicked on DAM: Review 2D Line Drawing which is found at row -- " + matchedRowIndex);
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-		
-		/*************************************** ***** 
-		 * Click on On Hold - BSA PIE(Rule Triggered) ****
+
+		/***************************************
+		 * ****Clicked on DAM: Review 2D Line Drawing  ****
 		 ***************************************/
 		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
-		test.pass("Search page grid displayed after clicking on On Hold - BSA PIE");
+		test.pass("");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-
 
 		/**************************************************
 		 * --------- Select filters for rows not having images------- *
@@ -123,28 +129,29 @@ public class TC_004_Digital_Asset extends BaseTest {
 		test.pass("Advance Search option clicked");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		digitalssetPage.generalDropdown_second().click();
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 		digitalssetPage.HavingNoImagesFilterDropdownValue().click();
 		Thread.sleep(2000);
-		
+
 		/**************************************************
 		 * --------- Select relationship dropdown------- *
 		 ********************************************************/
 		digitalssetPage.RelationshipMaindropdown_Obj().click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		digitalssetPage.HasImagesDropdownvalue().click();
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		test.pass("Has No images filter value set");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		digitalssetPage.Apply_btn_onFilter().click();
-		
+		Thread.sleep(5000);
+
 		/**************************************************
-		 * --------- wait for rows to appear after Filtering data with No Images------- *
+		 * --------- wait for rows to appear after Filtering data with No Images------* *
 		 ********************************************************/
 		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
 		test.pass("Search page No images records");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-		
+
 		/**************************************************
 		 ***** Click on any one of the entity****
 		 **************************************************/
@@ -168,13 +175,12 @@ public class TC_004_Digital_Asset extends BaseTest {
 		assertTrue("There should be results after applying filters", arrrowsdefined.size() > 0);
 
 		WebElement RowByRow = arrrowsdefined.get(0);
-		String SellableMaterialDescription = RowByRow
-				.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
+		String SellableMaterialDescription = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
 		String matid = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']")).getText();
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
 
-		/************************************************** --------- 
-		 * Click on the materialid from the result------- *
+		/**************************************************
+		 * --------- Click on the materialid from the result------- *
 		 ************************************************/
 		WebElement matidElement = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']"));
 		actions.moveToElement(RowByRow).build().perform();
@@ -182,9 +188,211 @@ public class TC_004_Digital_Asset extends BaseTest {
 		matidElement.click();
 		Thread.sleep(5000);
 		utils.waitForElement(() -> summaryPage.Things_INeedToFix(), "visible");
+		Thread.sleep(2000);
 		test.pass("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription
 				+ " is selected for completion");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-	}
+		
+		/*************************************************
+		 * --------- Capture % completion-It should be 0 ------ *
+		 ************************************************/
+		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
+		String percentagecompletion = searchPage.ProgressRing().getText();
+		System.out.println("Percentage completion of " + matid + " is " + percentagecompletion + " % ");
+		test.pass("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription
+				+ " is selected for completion");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		
+		/**************************************************
+		 * --------- Fill up the business condition-DAM: Review 2D Line Drawing------ *
+		 ************************************************/
+		List<WebElement> conditions = digitalssetPage.Summarythingsneedtofix_grid().findElements(By.cssSelector(".data-list"));
 
+		for (int i = 0; i < conditions.size(); i++) {
+			String busscondname = conditions.get(i).findElement(By.cssSelector("[class*='entity-content']")).getAttribute("title");
+			System.out.println("Condition " + (i + 1) + " -- " + busscondname );
+			if(busscondname.contains("DAM: Review 2D Line Drawing")) {
+				conditions.get(i).click();
+				break;
+			}
+		}
+		/**************************************************
+		 * --------- Approve from the drop down after clicking on 2d Line drawing------- *
+		 ************************************************/
+		WebElement approve2dlinedrawing_dropdown = digitalssetPage.common_ele_2dlinedrawingDropdown().getShadowRoot()
+				.findElement(By.cssSelector("#collectionContainer")).getShadowRoot()
+				.findElement(By.cssSelector("#collection_container_wrapper > div.d-flex > div.tags-container"));
+		
+		utils.waitForElement(() -> approve2dlinedrawing_dropdown, "visible");
+		Thread.sleep(2000);
+		test.pass("2d line drawing window appeared");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+
+		approve2dlinedrawing_dropdown.click();
+		Thread.sleep(2000);
+		WebElement approvedropdownvalue = digitalssetPage.common_ele_2dlinedrawingDropdown().
+		getShadowRoot().findElement(By.cssSelector("#lov")).
+		getShadowRoot().findElement(By.cssSelector("div.base-grid-structure.p-relative > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid")).
+		getShadowRoot().findElement(By.cssSelector("#grid")).
+		getShadowRoot().findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div > div > pebble-lov-item")).
+		getShadowRoot().findElement(By.cssSelector("div > div > div > span"));
+		
+		/*******************
+		 * Approve 2d line drawing
+		*******************/
+		approvedropdownvalue.click();
+		Thread.sleep(2000);
+		digitalssetPage.Save_2d_Line_Drawring().click();
+		Thread.sleep(3000);
+		utils.waitForElement(() -> digitalssetPage.Save_2d_Line_Drawring(), "clickable");
+		Thread.sleep(2000);
+		test.pass("Approved 2d Line drawing");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		
+		/*******************
+		 * Close 2d line drawing tab
+		*******************/
+		digitalssetPage.Close_2d_lineDrawingtab().click();
+		Thread.sleep(2000);
+		digitalssetPage.SummaryTab().click();
+		Thread.sleep(2000);
+		test.pass("Navigated to summary tab closing 2d line tab");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		
+		/**********************************************
+		 * From Summary tab select DAM: Review Representative Image (Primary) business condition
+		**********************************************/
+		WebElement summarybcs = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+		.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+		.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+		.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+		.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
+		.findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+		.findElement(By.cssSelector("[id^='rock-entity-summary-component-rs']")).getShadowRoot()
+		.findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+		.findElement(By.cssSelector("#rock-entity-tofix")).getShadowRoot()
+		.findElement(By.cssSelector("[id^='rock-entity-tofix-component-rs']")).getShadowRoot()
+		.findElement(By.cssSelector(".tofix-data-container > pebble-accordion"))
+		.findElement(By.cssSelector("[slot='accordion-content']"));
+		
+		List<WebElement> conditions_refresh = summarybcs.findElements(By.cssSelector(".data-list"));
+		System.out.println("There are " + conditions_refresh.size() + " elements after closing the summary tab----");
+		
+		int matchedRowIndex_2D = -1;
+		int matchedRowIndex_Primary = -1;
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+		
+		for (int i = 0; i < conditions_refresh.size(); i++) {
+			String busscondname = conditions_refresh.get(i).findElement(By.cssSelector("[class^='entity-content']")).getAttribute("title");
+			System.out.println("Condition " + (i + 1) + " -- " + busscondname );
+			
+			if (busscondname.equals("DAM: Review 2D Line Drawing")) {
+				matchedRowIndex_2D = i + 1;
+		    }
+			if (busscondname.equals("DAM: Review Representative Image (Primary)")) {
+				 matchedRowIndex_Primary = i;
+		        System.out.println("Clicked on: " + busscondname + " at position " + (i + 1));
+		    }
+		}
+		
+		if (matchedRowIndex_2D != -1) {
+		    System.out.println("\"DAM: Review 2D Line Drawing\" is at position " + matchedRowIndex_2D);
+		} else {
+		    System.out.println("\"DAM: Review 2D Line Drawing\" was not found.");
+		}
+		if (matchedRowIndex_Primary != -1) {
+		    System.out.println("\"DAM: Review Representative Image (Primary)\" is at position " + matchedRowIndex_Primary);
+		    conditions_refresh.get(matchedRowIndex_Primary).click();
+		} else {
+		    System.out.println("\"DAM: Review Representative Image (Primary)\" was not found.");
+		}
+		
+		System.out.println("DAM: Review Representative Image (Primary) found at row -- " + matchedRowIndex_Primary);
+		System.out.println("2D Line Drawing found at row --" + matchedRowIndex_2D );
+		
+		test.pass("Clicked on DAM: Review Representative Image (Primary) which is found at row -- " + matchedRowIndex_Primary);
+		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+
+		/*************************************************
+		 * --------- Wait for the image required drop down after clicking on Review Representative Image (Primary) ------ *
+		 ************************************************/
+		utils.waitForElement(() -> digitalssetPage.primary_Image_Required_dropdown_obj(), "clickable");
+		test.pass("Clicked on DAM: Review Representative Image (Primary) and arrived on Manage attributes page");
+		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		
+		/*************************************************
+		 * --------- Select Yes from the dropdown ------ *
+		 ************************************************/
+		
+		
+//		
+//		/*************************************************
+//		 * --------- After approving and adding the image check the % now ------ *
+//		 ************************************************/
+//		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
+//		String percentagecompletion_after2d = searchPage.ProgressRing().getText();
+//		System.out.println("Percentage completion of " + matid + " is " + percentagecompletion_after2d + " % ");
+//		test.pass("Percentage completion after approving the 2d Line diagram is " + percentagecompletion_after2d);
+//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//		
+//		digitalssetPage.Close_2d_lineDrawingtab().click();
+//		
+//		/*******************
+//		 * Click Summary tab
+//		*******************/
+//		digitalssetPage.SummaryTab().click();
+//		test.pass("I am on the summary tab " );
+//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//		/*******************
+//		 * Click Next
+//		*******************/
+//		digitalssetPage.Next_btn().click();
+//		Thread.sleep(3000);
+//		utils.waitForElement(() -> digitalssetPage.MoreActions_Dropdown_1(), "clickable");
+//		Thread.sleep(2000);
+//		test.pass("More actions page displayed to attach a image");
+//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//		
+//		/*******************************
+//		 * Check for how many images attached before adding a image
+//		*******************************/
+//		String totalimages_selected_txt = digitalssetPage.txt_Images_Selected().getText();
+//		String img_selcted = totalimages_selected_txt.split(" / ")[1];
+//		int totalsearchimagescount = Integer.parseInt(img_selcted);
+//		System.out.println("There are " + totalsearchimagescount + " before adding the image " );
+//		Assert.assertEquals(totalsearchimagescount, 0);
+		/*******************************
+		 * Click Add images drop down value
+		*******************************/
+//		digitalssetPage.MoreActions_Dropdown_2().click();
+//		Thread.sleep(2000);
+//		digitalssetPage.AddImage_dropdownValue().click();
+//		Thread.sleep(2000);
+//		utils.waitForElement(() -> digitalssetPage.Search_Images_input(), "clickable");
+//		test.pass("Arrived at adding image page");
+//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//		digitalssetPage.Search_Images_input().sendKeys("timken-single-row-deep",Keys.ENTER);
+//		Thread.sleep(2000);
+//		/*******************************
+//		 * Select the first image and save
+//		*******************************/
+//		digitalssetPage.First_Image_checkbox().click();
+//		Thread.sleep(2000);
+//		utils.waitForElement(() -> digitalssetPage.First_Image_checkbox(), "clickable");
+//		test.pass("Images with the filters appeared and is selected");
+//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//		digitalssetPage.Save_btn_Add_Image().click();
+//		utils.waitForElement(() -> digitalssetPage.MoreActions_Dropdown_1(), "clickable");
+//		Thread.sleep(2000);
+//		/*******************************
+//		 * Check for how many images attached after adding a image
+//		*******************************/
+//		String totalimages_selected_txt_after = digitalssetPage.txt_Images_Selected().getText();
+//		String img_selcted_after = totalimages_selected_txt_after.split(" / ")[1];
+//		int totalsearchimagescount_after = Integer.parseInt(img_selcted_after);
+//		System.out.println("There are " + totalsearchimagescount_after + " after adding the image " );
+//		Assert.assertTrue(totalsearchimagescount_after>0);
+//
+//		
+	}
 }

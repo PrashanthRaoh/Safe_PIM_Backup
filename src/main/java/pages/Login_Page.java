@@ -63,8 +63,8 @@ public class Login_Page {
 		LaunchSite();
 		String credentials = getProperty(UseCaseOwner);
 		String[] abc = credentials.split(",");
-		System.out.println("Username: " + abc[0]);
-		System.out.println("Password: " + abc[1]);
+//		System.out.println("Username: " + abc[0]);
+//		System.out.println("Password: " + abc[1]);
 
 		String username = abc[0];
 		String password = abc[1];
