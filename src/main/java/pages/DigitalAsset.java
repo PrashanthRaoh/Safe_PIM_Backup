@@ -225,7 +225,95 @@ public class DigitalAsset {
 			    .findElement(By.cssSelector(".d-flex"));
 	}
 	
+	public WebElement ImageRequired_Yes() {
+		return common_element().getShadowRoot()
+			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+			    .findElement(By.cssSelector("#rock-attribute-list-container > rock-attribute-list")).getShadowRoot()
+			    .findElements(By.cssSelector("[id^='rs']")).get(2).getShadowRoot()
+			    .findElement(By.cssSelector("#input")).getShadowRoot()
+			    .findElement(By.cssSelector("bedrock-lov")).getShadowRoot()
+			    .findElement(By.cssSelector("#lov")).getShadowRoot()
+			    .findElement(By.cssSelector("div.base-grid-structure.p-relative > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#lit-grid"))
+			    .findElement(By.cssSelector("[ref='eRootWrapper']"))
+			    .findElement(By.cssSelector("[ref='gridBody']"))
+			    .findElement(By.cssSelector("[ref='eBodyViewport']"))
+			    .findElement(By.cssSelector("[ref='centerContainer']"))
+			    .findElement(By.cssSelector("[ref='eContainer']"))
+			    .findElement(By.cssSelector("[row-index='1']"));
+	}
+	public WebElement ImageRequired_No() {
+		return common_element().getShadowRoot()
+				.findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+				.findElement(By.cssSelector("#rock-attribute-list-container > rock-attribute-list")).getShadowRoot()
+				.findElements(By.cssSelector("[id^='rs']")).get(2).getShadowRoot()
+				.findElement(By.cssSelector("#input")).getShadowRoot()
+				.findElement(By.cssSelector("bedrock-lov")).getShadowRoot()
+				.findElement(By.cssSelector("#lov")).getShadowRoot()
+				.findElement(By.cssSelector("div.base-grid-structure.p-relative > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid")).getShadowRoot()
+				.findElement(By.cssSelector("#grid")).getShadowRoot()
+				.findElement(By.cssSelector("#lit-grid"))
+				.findElement(By.cssSelector("[ref='eRootWrapper']"))
+				.findElement(By.cssSelector("[ref='gridBody']"))
+				.findElement(By.cssSelector("[ref='eBodyViewport']"))
+				.findElement(By.cssSelector("[ref='centerContainer']"))
+				.findElement(By.cssSelector("[ref='eContainer']"))
+				.findElement(By.cssSelector("[row-index='0']"));
+	}
 	
+	public WebElement ApprovePrimaryImagedropdown_commonobj() {
+		return common_element().getShadowRoot()
+			    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+			    .findElement(By.cssSelector("#rock-attribute-list-container > rock-attribute-list")).getShadowRoot()
+			    .findElements(By.cssSelector("[id^='rs']")).get(3);
+	}
+	
+	public WebElement ApprovePrimaryImagedropdown_obj() {
+		return ApprovePrimaryImagedropdown_commonobj().getShadowRoot()
+	    .findElement(By.cssSelector("#input")).getShadowRoot()
+	    .findElement(By.cssSelector("bedrock-lov")).getShadowRoot()
+	    .findElement(By.cssSelector("#collectionContainer")).getShadowRoot()
+	    .findElement(By.cssSelector("#collection_container_wrapper > div.d-flex > div.tags-container"));
+	}
+	public WebElement Approve_Primary_Image_dropdownvalue() {
+		return ApprovePrimaryImagedropdown_commonobj().getShadowRoot()
+	    .findElement(By.cssSelector("#input")).getShadowRoot()
+	    .findElement(By.cssSelector("bedrock-lov")).getShadowRoot()
+	    .findElement(By.cssSelector("#lov")).getShadowRoot()
+	    .findElement(By.cssSelector("div.base-grid-structure.p-relative > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid")).getShadowRoot()
+	    .findElement(By.cssSelector("#grid")).getShadowRoot()
+	    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div > div > pebble-lov-item"));
+	}
+	
+	public WebElement AddPrimaryImage_Save_btn() {
+		return common_element().getShadowRoot()
+	    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+	    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+	    .findElement(By.cssSelector("[id^='rock-attribute-split-screen-component-rs']")).getShadowRoot()
+	    .findElement(By.cssSelector("#undefined-attribute-container > rock-attribute-manage")).getShadowRoot()
+	    .findElement(By.cssSelector("#next")).getShadowRoot()
+	    .findElement(By.cssSelector("#buttonTextBox"));
+	}
+	
+	public WebElement Back_btn() {
+		return common_element().getShadowRoot()
+	    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+	    .findElement(By.cssSelector("[id^='rock-wizard-manage-component-rs']")).getShadowRoot()
+	    .findElement(By.cssSelector("#back")).getShadowRoot()
+	    .findElement(By.cssSelector("#simpleButton"));
+
+	}
 }
+
 
 

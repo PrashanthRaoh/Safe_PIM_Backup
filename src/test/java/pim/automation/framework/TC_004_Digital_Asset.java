@@ -104,7 +104,6 @@ public class TC_004_Digital_Asset extends BaseTest {
 		        break;
 		    }
 		}
-
 		if (matchedRowIndex != -1) {
 		    System.out.println("Found 'DAM: Review 2D Line Drawing' in row: " + matchedRowIndex);
 		} else {
@@ -323,76 +322,177 @@ public class TC_004_Digital_Asset extends BaseTest {
 		/*************************************************
 		 * --------- Select Yes from the dropdown ------ *
 		 ************************************************/
+		digitalssetPage.primary_Image_Required_dropdown_obj().click();
+		Thread.sleep(2000);
+		digitalssetPage.ImageRequired_Yes().click();
+		Thread.sleep(2000);
+		/*************************************************
+		 * --------- Approve Image required ------ *
+		 ************************************************/
+		digitalssetPage.ApprovePrimaryImagedropdown_obj().click();
+		Thread.sleep(2000);
+		digitalssetPage.Approve_Primary_Image_dropdownvalue().click();
+		Thread.sleep(2000);
+		/*************************************************
+		 * --------- Save ------ *
+		 ************************************************/
+		digitalssetPage.AddPrimaryImage_Save_btn().click();
+		Thread.sleep(2000);
+		/*************************************************
+		 * --------- Click Next ------ *
+		 ************************************************/
+		digitalssetPage.Next_btn().click();
+		Thread.sleep(3000);
+		/*******************
+		 * Click Next
+		*******************/
+		utils.waitForElement(() -> digitalssetPage.MoreActions_Dropdown_1(), "clickable");
+		Thread.sleep(2000);
+		test.pass("More actions page displayed to attach a image");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		
-		
-//		
-//		/*************************************************
-//		 * --------- After approving and adding the image check the % now ------ *
-//		 ************************************************/
-//		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
-//		String percentagecompletion_after2d = searchPage.ProgressRing().getText();
-//		System.out.println("Percentage completion of " + matid + " is " + percentagecompletion_after2d + " % ");
-//		test.pass("Percentage completion after approving the 2d Line diagram is " + percentagecompletion_after2d);
-//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-//		
-//		digitalssetPage.Close_2d_lineDrawingtab().click();
-//		
-//		/*******************
-//		 * Click Summary tab
-//		*******************/
-//		digitalssetPage.SummaryTab().click();
-//		test.pass("I am on the summary tab " );
-//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-//		/*******************
-//		 * Click Next
-//		*******************/
-//		digitalssetPage.Next_btn().click();
-//		Thread.sleep(3000);
-//		utils.waitForElement(() -> digitalssetPage.MoreActions_Dropdown_1(), "clickable");
-//		Thread.sleep(2000);
-//		test.pass("More actions page displayed to attach a image");
-//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-//		
-//		/*******************************
-//		 * Check for how many images attached before adding a image
-//		*******************************/
-//		String totalimages_selected_txt = digitalssetPage.txt_Images_Selected().getText();
-//		String img_selcted = totalimages_selected_txt.split(" / ")[1];
-//		int totalsearchimagescount = Integer.parseInt(img_selcted);
-//		System.out.println("There are " + totalsearchimagescount + " before adding the image " );
-//		Assert.assertEquals(totalsearchimagescount, 0);
+		/*************************************************
+		 * --------- After approving and adding the image check the % now ------ *
+		 ************************************************/
+		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
+		String percentagecompletion_AddPrimaryimage = searchPage.ProgressRing().getText();
+		System.out.println("Percentage completion of " + matid + " is " + percentagecompletion_AddPrimaryimage + " % ");
+		test.pass("Percentage completion after approving the Add Primary image is " + percentagecompletion_AddPrimaryimage);
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+
+		/*******************************
+		 * Check for how many images attached before adding a image
+		*******************************/
+		String totalimages_selected_txt = digitalssetPage.txt_Images_Selected().getText();
+		String img_selcted = totalimages_selected_txt.split(" / ")[1];
+		int totalsearchimagescount = Integer.parseInt(img_selcted);
+		System.out.println("There are " + totalsearchimagescount + " before adding the image " );
+		Assert.assertEquals(totalsearchimagescount, 0);
 		/*******************************
 		 * Click Add images drop down value
 		*******************************/
-//		digitalssetPage.MoreActions_Dropdown_2().click();
+		digitalssetPage.MoreActions_Dropdown_2().click();
+		Thread.sleep(2000);
+		digitalssetPage.AddImage_dropdownValue().click();
+		Thread.sleep(2000);
+		utils.waitForElement(() -> digitalssetPage.Search_Images_input(), "clickable");
+		test.pass("Arrived at adding image page");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		digitalssetPage.Search_Images_input().sendKeys("timken-single-row-deep",Keys.ENTER);
+		Thread.sleep(2000);
+		
+		/*******************************
+		 * Select the first image and save
+		*******************************/
+		digitalssetPage.First_Image_checkbox().click();
+		Thread.sleep(2000);
+		utils.waitForElement(() -> digitalssetPage.First_Image_checkbox(), "clickable");
+		test.pass("Images with the filters appeared and is selected");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		digitalssetPage.Save_btn_Add_Image().click();
+		utils.waitForElement(() -> digitalssetPage.MoreActions_Dropdown_1(), "clickable");
+		Thread.sleep(2000);
+		/*******************************
+		 * Check for how many images attached after adding a image
+		*******************************/
+		String totalimages_selected_txt_after = digitalssetPage.txt_Images_Selected().getText();
+		String img_selcted_after = totalimages_selected_txt_after.split(" / ")[1];
+		int totalsearchimagescount_after = Integer.parseInt(img_selcted_after);
+		System.out.println("There are " + totalsearchimagescount_after + " after adding the image " );
+		Assert.assertTrue(totalsearchimagescount_after>0);
+		
+		/*************************************************
+		 * --------- After approving and adding the image check the % now ------ *
+		 ************************************************/
+		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
+		String percentagecompletion_Allprocess = searchPage.ProgressRing().getText();
+		System.out.println("Percentage completion after approving the stages for " + matid + " is " + percentagecompletion_Allprocess + " % ");
+		test.pass("Percentage completion after approving the stages is " + percentagecompletion_Allprocess);
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+
+		/*************************************************
+		 * --------- Again click on Back ------ *
+		 ************************************************/
+		digitalssetPage.Back_btn().click();
+		Thread.sleep(2000);
+		System.out.println("Back button clicked");
+		utils.waitForElement(() -> digitalssetPage.primary_Image_Required_dropdown_obj(), "clickable");
+		test.pass("Back button clicked to approve the transaction");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		
+		digitalssetPage.primary_Image_Required_dropdown_obj().click();
+		Thread.sleep(2000);
+		digitalssetPage.ImageRequired_No().click();
+		Thread.sleep(2000);
+		
+		
+		digitalssetPage.ApprovePrimaryImagedropdown_obj().click();
+		Thread.sleep(2000);
+		digitalssetPage.Approve_Primary_Image_dropdownvalue().click();
+		Thread.sleep(2000);
+		/*************************************************
+		 * --------- Save ------ *
+		 ************************************************/
+		digitalssetPage.AddPrimaryImage_Save_btn().click();
+		Thread.sleep(5000);
+		
+		/*************************************************
+		 * --------- Check the % completion after approving again------ *
+		 ************************************************/
+		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
+		String percentagecompletion_Approvingagain = searchPage.ProgressRing().getText();
+		System.out.println("Percentage completion after approving the image primary again clicking on back button for " + matid + " is " + percentagecompletion_Approvingagain + " % ");
+		test.pass("Percentage completion after approving the image primary again clicking on back button is -- " + percentagecompletion_Approvingagain);
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		
+		/*************************************************
+		 * --------- Click on the search thing bread crum ------- *
+		 ************************************************/
+//		searchPage.Search_things_BreadCrum().click();
 //		Thread.sleep(2000);
-//		digitalssetPage.AddImage_dropdownValue().click();
-//		Thread.sleep(2000);
-//		utils.waitForElement(() -> digitalssetPage.Search_Images_input(), "clickable");
-//		test.pass("Arrived at adding image page");
-//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-//		digitalssetPage.Search_Images_input().sendKeys("timken-single-row-deep",Keys.ENTER);
-//		Thread.sleep(2000);
-//		/*******************************
-//		 * Select the first image and save
-//		*******************************/
-//		digitalssetPage.First_Image_checkbox().click();
-//		Thread.sleep(2000);
-//		utils.waitForElement(() -> digitalssetPage.First_Image_checkbox(), "clickable");
-//		test.pass("Images with the filters appeared and is selected");
-//		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-//		digitalssetPage.Save_btn_Add_Image().click();
-//		utils.waitForElement(() -> digitalssetPage.MoreActions_Dropdown_1(), "clickable");
-//		Thread.sleep(2000);
-//		/*******************************
-//		 * Check for how many images attached after adding a image
-//		*******************************/
-//		String totalimages_selected_txt_after = digitalssetPage.txt_Images_Selected().getText();
-//		String img_selcted_after = totalimages_selected_txt_after.split(" / ")[1];
-//		int totalsearchimagescount_after = Integer.parseInt(img_selcted_after);
-//		System.out.println("There are " + totalsearchimagescount_after + " after adding the image " );
-//		Assert.assertTrue(totalsearchimagescount_after>0);
+//		utils.waitForElement(() ->searchPage.getgrid(), "clickable");
+//		test.pass("Navigated back to search thing ");
+//		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 //
-//		
+//		/*************************************************
+//		 * --------- Verify the record again in the search thing. It should not be listed ------- *
+//		 ************************************************/
+//		searchPage.searchthingdomain_Input_Mat_Id().click();
+//		searchPage.searchthingdomain_Input_Mat_Id().clear();
+//		searchPage.searchthingdomain_Input_Mat_Id().sendKeys(matid);
+//		searchPage.searchthingdomain_Input_Mat_Id().sendKeys(Keys.ENTER);
+//		Thread.sleep(5000);
+//
+//		try {
+//			String txt = searchPage.rowsdisplayedtext().getText();
+//			String result = txt.split(" / ")[1];
+//			int zerorows = Integer.parseInt(result);
+//			System.out.println(zerorows);
+//			Assert.assertEquals(zerorows, 0);
+//			test.pass(matid + " completion is 100%. Hence not visible");
+//			test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//
+//		} catch (Exception e) {
+//			WebElement rowsredefined2 = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+//					.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+//					.findElement(By.cssSelector("[id^='currentApp_search-thing_']")).getShadowRoot()
+//					.findElement(By.cssSelector("[id^='app-entity-discovery-component-']")).getShadowRoot()
+//					.findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+//					.findElement(By.cssSelector("#entitySearchGrid")).getShadowRoot()
+//					.findElement(By.cssSelector("#entityGrid")).getShadowRoot()
+//					.findElement(By.cssSelector("#pebbleGridContainer > pebble-grid")).getShadowRoot()
+//					.findElement(By.cssSelector("#grid"));
+//			List<WebElement> arrrowsdefined2 = rowsredefined2.getShadowRoot().findElements(By.cssSelector(
+//					"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
+//
+//			if (arrrowsdefined2.size() > 0) {
+//				System.out.println("Records found for the search criteria");
+//				test.pass(matid + " completion is NOT 100%. Pleaes verify");
+//				test.log(Status.FAIL,
+//						MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//			}
+//		}
+		
+		
 	}
 }
