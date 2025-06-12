@@ -31,8 +31,7 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		String className = this.getClass().getSimpleName();
 		System.out.println(className);
 		test = BaseTest.extentreport.createTest(className);
-		test.assignAuthor(System.getProperty("user.name")).assignCategory("Regression")
-				.assignDevice(System.getenv("COMPUTERNAME"));
+		test.assignAuthor(System.getProperty("user.name")).assignCategory("Regression").assignDevice(System.getenv("COMPUTERNAME"));
 
 		homePage = new HomePage(driver);
 		SearchPage2 searchPage = new SearchPage2(driver);
@@ -125,7 +124,7 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		/*************************************************
 		 * --------- Capture % completion-It should be 0 ------ *
 		 ************************************************/
-		utils.waitForElement(() -> searchPage.ProgressRing(), "visible");
+		utils.waitForElement(searchPage::ProgressRing, "visible");
 		String percentagecompletion = searchPage.ProgressRing().getText();
 		System.out.println("Percentage completion of " + matid + " is " + percentagecompletion + " % ");
 		test.pass("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription
@@ -136,18 +135,18 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		System.out.println("There are  " + bussrule.size() + " bussrule");
 		Assert.assertEquals(bussrule.size(), 1, "The size of bussrule should be 1");
 
-//		/*************************************************
-//		 * --------- Click on the Marketing enrichment business rule------- *
-//		 ************************************************/
-		bussrule.getFirst().click();
+		/*************************************************
+		 * --------- Click on the Marketing enrichment business rule------- *
+		 ************************************************/
+		bussrule.get(0).click();
 		Thread.sleep(4000);
-		utils.waitForElement(() -> searchPage.shortDescription(), "clickable");
+		utils.waitForElement(searchPage::shortDescription, "clickable");
 		test.pass("Summary page of the material displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
-//		/*************************************************
-//		 * --------- Enter mandatory fields to complete the transaction------- *
-//		 ************************************************/
+		/*************************************************
+		 * --------- Enter mandatory fields to complete the transaction------- *
+		 ************************************************/
 		searchPage.shortDescription().sendKeys("Short description to complete transaction");
 		Thread.sleep(1000);
 		searchPage.LongDescription().sendKeys("This is long description");
@@ -155,9 +154,9 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		test.pass("Entered mandatory field values on summary page");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
-//		/*************************************************
-//		 * --------- Save the transaction------- *
-//		 ************************************************/
+		/*************************************************
+		 * --------- Save the transaction------- *
+		 ************************************************/
 		searchPage.SaveTransaction_btn().click();
 		Thread.sleep(8000);
 		test.pass("Saved the transaction");
@@ -170,11 +169,9 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		String percentagecompletion2 = searchPage.ProgressRing().getText();
 		System.out.println("Percentage completion is now " + percentagecompletion2);
 
-//		Assert.assertEquals(percentagecompletion2.trim(), "100", "Percentagecompletion is now 100");
 		int percfullcompletion = Integer.parseInt(percentagecompletion2);
 
 		if (percfullcompletion == 100) {
-//			Assert.assertEquals("The value should be 100", percfullcompletion == 100);
 			test.pass("Percentage completion is 100%");
 			test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		} else {
@@ -193,8 +190,7 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 
 		/*************************************************
-		 * --------- Verify the record again in the search thing. It should not be
-		 * listed ------- *
+		 * --------- Verify the record again in the search thing. It should not be listed ------- *
 		 ************************************************/
 		searchPage.searchthingdomain_Input_Mat_Id().click();
 		searchPage.searchthingdomain_Input_Mat_Id().clear();

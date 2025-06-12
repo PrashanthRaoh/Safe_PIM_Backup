@@ -173,6 +173,11 @@ public class DigitalAsset {
 	    .findElement(By.cssSelector("#rockTabs")).getShadowRoot()
 	    .findElement(By.cssSelector("#tab-review2dlinedrawingbc_businessCondition > div > div.tab-title > span.dynamic-close"));
 	}
+	public WebElement Close_DAM_review_Primary_tab() {
+		return common_element().getShadowRoot()
+				.findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+				.findElement(By.cssSelector("#tab-reviewprimaryimagebc_businessCondition > div > div.tab-title > span.dynamic-close"));
+	}
 	
 	public WebElement SummaryTab() {
 		return common_element().getShadowRoot()
@@ -209,7 +214,6 @@ public class DigitalAsset {
 				.getShadowRoot().findElement(By.cssSelector("#input"))
 				.getShadowRoot().findElement(By.cssSelector("bedrock-lov"));
 	}
-
 	
 	public WebElement primary_Image_Required_dropdown_obj() {
 		return common_element().getShadowRoot()
@@ -313,7 +317,54 @@ public class DigitalAsset {
 	    .findElement(By.cssSelector("#simpleButton"));
 
 	}
+	
+	
+	public WebElement SellableProductStatus() {
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_search-thing_rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-discovery-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
+			    .findElement(By.cssSelector("#search-filter")).getShadowRoot()
+			    .findElement(By.cssSelector("#attributeModelLov_thing")).getShadowRoot()
+			    .findElement(By.cssSelector("#modelLov_thing")).getShadowRoot()
+			    .findElement(By.cssSelector("div.base-grid-structure.p-relative.hideLovHeader > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div > div > pebble-lov-item")).getShadowRoot()
+			    .findElement(By.cssSelector("div > div > div > span"));
+
+	}
+	
+	public WebElement OnHoldSystem_dropdownvalue() {
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_search-thing_rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-discovery-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
+			    .findElement(By.cssSelector("#search-filter")).getShadowRoot()
+			    .findElement(By.cssSelector("#rockEntityLov")).getShadowRoot()
+			    .findElement(By.cssSelector("#entityLov")).getShadowRoot()
+			    .findElement(By.cssSelector("div.base-grid-structure.p-relative > div.base-grid-structure-child-2.overflow-auto.p-relative > pebble-grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#grid")).getShadowRoot()
+			    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div:nth-child(6) > div > pebble-lov-item")).getShadowRoot()
+			    .findElement(By.cssSelector("div > div > div > span.has-only-option"));
+	}
+	
+	public WebElement Status_Apply_btn() {
+		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_search-thing_rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-discovery-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchDiscoveryGrid")).getShadowRoot()
+			    .findElement(By.cssSelector("#entitySearchFilter")).getShadowRoot()
+			    .findElement(By.cssSelector("#search-filter")).getShadowRoot()
+			    .findElement(By.cssSelector("#rockEntityLov")).getShadowRoot()
+			    .findElement(By.cssSelector("#entityLov")).getShadowRoot()
+			    .findElement(By.cssSelector("#confirmButton")).getShadowRoot()
+			    .findElement(By.cssSelector("#buttonTextBox"));
+
+	}
+	
 }
-
-
-

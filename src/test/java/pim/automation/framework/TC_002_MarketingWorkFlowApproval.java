@@ -29,8 +29,7 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		String className = this.getClass().getSimpleName();
 		System.out.println(className);
 		test = BaseTest.extentreport.createTest(className);
-		test.assignAuthor(System.getProperty("user.name")).assignCategory("Regression")
-				.assignDevice(System.getenv("COMPUTERNAME"));
+		test.assignAuthor(System.getProperty("user.name")).assignCategory("Regression").assignDevice(System.getenv("COMPUTERNAME"));
 
 		homePage = new HomePage(driver);
 		SearchPage2 searchPage = new SearchPage2(driver);
@@ -54,8 +53,7 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		/**************************************************
 		 ***** Click on Marketing Enrichment in workflow ****
 		 **************************************************/
-		WebElement detailsEnrichment = homePage.Moredetails_MarketingEnrich().getShadowRoot()
-				.findElement(By.cssSelector("#viewDetails > span"));
+		WebElement detailsEnrichment = homePage.Moredetails_MarketingEnrich().getShadowRoot().findElement(By.cssSelector("#viewDetails > span"));
 		detailsEnrichment.click();
 		Thread.sleep(5000);
 
@@ -65,7 +63,7 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		homePage.ReadyForTransistion_Market_Enrich().click();
 		System.out.println("Clicked on Ready for Transistion on Marketing enrichment more details");
 		Thread.sleep(5000);
-		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
+		utils.waitForElement(searchPage::getgrid, "clickable");
 		System.out.println("Search page grid displayed");
 		test.pass("Search page grid displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
@@ -93,8 +91,7 @@ public class TC_002_MarketingWorkFlowApproval extends BaseTest {
 		assertTrue("There should be results after applying filters", arrrowsdefined.size() > 0);
 
 		WebElement RowByRow = arrrowsdefined.get(0);
-		String SellableMaterialDescription = RowByRow
-				.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
+		String SellableMaterialDescription = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
 		String matid = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']")).getText();
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
 

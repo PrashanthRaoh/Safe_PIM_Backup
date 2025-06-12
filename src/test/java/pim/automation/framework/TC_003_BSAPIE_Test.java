@@ -52,7 +52,7 @@ public class TC_003_BSAPIE_Test extends BaseTest {
 		utils.waitForElement(() -> homePage.BSAPIEUsecaseApprovalTab(), "visible");
 
 		/**************************************************
-		 * ***** Verify that logged in user is Marketing owner
+		 * ***** Verify that logged in user is BSAPIEowner
 		 **************************************************/
 		Thread.sleep(5000);
 		homePage.BSAPIEUsecaseApprovalTab().click();

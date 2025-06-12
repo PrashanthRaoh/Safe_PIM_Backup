@@ -39,7 +39,8 @@ public class SearchPage2 {
 	}
 
 	public WebElement getFilterButton() {
-		return commonelement().getShadowRoot().findElement(filterButtonLocator).getShadowRoot()
+		return commonelement().getShadowRoot()
+				.findElement(filterButtonLocator).getShadowRoot()
 				.findElement(By.cssSelector("#buttonTextBox"));
 	}
 
@@ -82,7 +83,8 @@ public class SearchPage2 {
 	}
 
 	public WebElement Search_MaterialType() {
-		WebElement inputElement = commonelement().getShadowRoot().findElement(By.cssSelector("#refineMoreSearchbox"))
+		WebElement inputElement = commonelement().getShadowRoot()
+				.findElement(By.cssSelector("#refineMoreSearchbox"))
 				.getShadowRoot().findElement(By.cssSelector("#input"));
 		return inputElement;
 	}
