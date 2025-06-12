@@ -333,7 +333,6 @@ public class DigitalAsset {
 			    .findElement(By.cssSelector("#grid")).getShadowRoot()
 			    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div > div > pebble-lov-item")).getShadowRoot()
 			    .findElement(By.cssSelector("div > div > div > span"));
-
 	}
 	
 	public WebElement OnHoldSystem_dropdownvalue() {
@@ -351,7 +350,6 @@ public class DigitalAsset {
 			    .findElement(By.cssSelector("#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div:nth-child(6) > div > pebble-lov-item")).getShadowRoot()
 			    .findElement(By.cssSelector("div > div > div > span.has-only-option"));
 	}
-	
 	public WebElement Status_Apply_btn() {
 		return driver.findElement(By.cssSelector("#app")).getShadowRoot()
 			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
@@ -366,5 +364,4 @@ public class DigitalAsset {
 			    .findElement(By.cssSelector("#buttonTextBox"));
 
 	}
-	
 }

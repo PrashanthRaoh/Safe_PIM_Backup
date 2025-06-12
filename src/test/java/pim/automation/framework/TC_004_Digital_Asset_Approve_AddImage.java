@@ -1,8 +1,6 @@
 package pim.automation.framework;
 
 import static org.junit.Assert.assertTrue;
-import static org.testng.Assert.assertEquals;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
