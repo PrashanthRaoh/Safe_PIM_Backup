@@ -98,7 +98,6 @@ public class Utils extends BaseTest {
 		Date today = new Date();
 		SimpleDateFormat SIMPDFORMAT = new SimpleDateFormat("ddMMYY_HHmmss");
 		String date = SIMPDFORMAT.format(today);
-
 		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 		File Destinationfilepath = new File("./Screenshots/ " + date + ".png");
 		FileUtils.copyFile(src, Destinationfilepath);
@@ -110,53 +109,3 @@ public class Utils extends BaseTest {
 		return obj.getClass().getSimpleName();
 	}
 }
-
-
-
-
-
-///	 Generic wait function
-//public WebElement waitForElement(WebElement element, String conditionType) {
-//	try {
-//		switch (conditionType.toLowerCase()) {
-//		case "clickable":
-//			wait.until(driver -> {
-//				try {
-//					return element.isDisplayed() && element.isEnabled();
-//				} catch (StaleElementReferenceException | NoSuchElementException ex) {
-//					return false;
-//				}
-//			});
-//			return element;
-//		case "visible":
-//			wait.until(driver -> {
-//				try {
-//					return element.isDisplayed();
-//				} catch (StaleElementReferenceException | NoSuchElementException ex) {
-//					return false;
-//				}
-//			});
-//			return element;
-//		case "invisibility":
-//			wait.until(driver -> {
-//				try {
-//					return !element.isDisplayed();
-//				} catch (StaleElementReferenceException | NoSuchElementException ex) {
-//					return true;
-//				}
-//			});
-//			return null;
-//		default:
-//			throw new IllegalArgumentException("Invalid wait condition type: " + conditionType);
-//		}
-//	} catch (Exception e) {
-//		try {
-//			String screenshotPath = Takescreenshot(driver);
-//			BaseTest.extentTest.fail("Element wait failed for condition: " + conditionType + " - " + e.getMessage(),
-//					MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
-//		} catch (IOException io) {
-//			io.printStackTrace();
-//		}
-//		throw new RuntimeException("waitForElement failed: " + e.getMessage(), e);
-//	}
-//}
