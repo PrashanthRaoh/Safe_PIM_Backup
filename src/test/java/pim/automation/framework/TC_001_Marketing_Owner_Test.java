@@ -98,8 +98,10 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 				.findElement(By.cssSelector("#pebbleGridContainer > pebble-grid")).getShadowRoot()
 				.findElement(By.cssSelector("#grid"));
 
+//		List<WebElement> arrrowsdefined = rowsredefined.getShadowRoot().findElements(By.cssSelector(
+//				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
 		List<WebElement> arrrowsdefined = rowsredefined.getShadowRoot().findElements(By.cssSelector(
-				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
+				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div"));
 
 		System.out.println("Total rows after entering the wide range filter criteria -- " + arrrowsdefined.size());
 		test.pass("Rows after entering 0s appeared");
@@ -222,7 +224,7 @@ public class TC_001_Marketing_Owner_Test extends BaseTest {
 
 			if (arrrowsdefined2.size() > 0) {
 				System.out.println("Records found for the search criteria");
-				test.pass(matid + " completion is NOT 100%. Pleaes verify");
+				test.fail(matid + " completion is NOT 100%. Pleaes verify");
 				test.log(Status.FAIL,
 						MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 

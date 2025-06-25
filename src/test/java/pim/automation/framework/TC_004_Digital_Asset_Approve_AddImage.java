@@ -165,8 +165,11 @@ public class TC_004_Digital_Asset_Approve_AddImage extends BaseTest {
 				.findElement(By.cssSelector("#pebbleGridContainer > pebble-grid")).getShadowRoot()
 				.findElement(By.cssSelector("#grid"));
 
+//		List<WebElement> arrrowsdefined = rowsredefined.getShadowRoot().findElements(By.cssSelector(
+//				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
+		
 		List<WebElement> arrrowsdefined = rowsredefined.getShadowRoot().findElements(By.cssSelector(
-				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
+				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div"));
 
 		System.out.println("Total rows after entering setting the filter criteria -- " + arrrowsdefined.size());
 		test.pass("Rows after setting the filter criteria appeared");
@@ -211,7 +214,7 @@ public class TC_004_Digital_Asset_Approve_AddImage extends BaseTest {
 		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
 		
 		List<WebElement> status_Pending_rows = rowsApplyfilter.getShadowRoot().findElements(By.cssSelector(
-				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
+				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div"));
 
 		System.out.println("Total rows after applying Pending status filter criteria -- " + status_Pending_rows.size());
 		test.pass("Total rows after applying Pending status filter criteria is "  + status_Pending_rows.size());
@@ -455,7 +458,6 @@ public class TC_004_Digital_Asset_Approve_AddImage extends BaseTest {
 		Assert.assertEquals(percentValue, 100, "Expected percentage completion to be 100%");
 		test.pass("Percentage completion after approving the Add Primary image is " + percentagecompletion_AddPrimaryimage);
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-		
 
 		searchPage.Search_things_BreadCrum().click();
 		Thread.sleep(2000);
@@ -492,11 +494,11 @@ public class TC_004_Digital_Asset_Approve_AddImage extends BaseTest {
 					.findElement(By.cssSelector("#pebbleGridContainer > pebble-grid")).getShadowRoot()
 					.findElement(By.cssSelector("#grid"));
 			List<WebElement> arrrowsdefined2 = rowsredefined2.getShadowRoot().findElements(By.cssSelector(
-					"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div> div.ag-row.ag-row-even.ag-row-level-0"));
+					"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div"));
 
 			if (arrrowsdefined2.size() > 0) {
 				System.out.println("Records found for the search criteria");
-				test.pass(matid + " completion is NOT 100%. Pleaes verify");
+				test.fail(matid + " completion is NOT 100%. Pleaes verify");
 				test.log(Status.FAIL,
 						MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 			}

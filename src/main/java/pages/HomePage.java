@@ -32,16 +32,12 @@ public class HomePage {
 		return searchBtn;
 	}
 
-//	public void clickSearch_Products_Button() throws InterruptedException {
-//		WebElement Search_Productbtn = driver.findElement(RootElement).getShadowRoot()
-//				.findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-//				.findElement(By.cssSelector("#navMenu")).getShadowRoot()
-//				.findElement(By.cssSelector("#pageMenuIcon_2 > a.menu-icon.page-title-icon"));
-//
-//		utils.waitForElement(Search_Productbtn, "clickable");
-//		Thread.sleep(3000);
-//		Search_Productbtn.click();
-//	}
+	public WebElement clickSearch_Products_Button() throws InterruptedException {
+		return driver.findElement(RootElement).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#navMenu")).getShadowRoot()
+				.findElement(By.cssSelector("#pageMenuIcon_2 > a.menu-icon.page-title-icon"));
+	}
 
 
 
