@@ -28,7 +28,7 @@ public class Login_Page {
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
 		homePage = new HomePage(driver);
-		utils = new Utils(driver);
+		this.utils = new Utils(driver, null);
 	}
 
 	public void enterEmail(String email) {
@@ -63,9 +63,6 @@ public class Login_Page {
 		LaunchSite();
 		String credentials = getProperty(UseCaseOwner);
 		String[] abc = credentials.split(",");
-//		System.out.println("Username: " + abc[0]);
-//		System.out.println("Password: " + abc[1]);
-
 		String username = abc[0];
 		String password = abc[1];
 

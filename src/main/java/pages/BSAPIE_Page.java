@@ -1,6 +1,9 @@
 package pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -52,4 +55,44 @@ public class BSAPIE_Page {
 			    .findElement(By.cssSelector("#pebble-tag"))
 			    .findElement(By.cssSelector(".tag-item > .tag-name-value > .attribute-name"));
 		}
+		
+		public WebElement Workflow_Refresh_btn() {
+			return driver.findElement(By.cssSelector("#app")).getShadowRoot()
+				    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+				    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+				    .findElement(By.cssSelector("#entityManageHeader")).getShadowRoot()
+				    .findElement(By.cssSelector("#entityActions")).getShadowRoot()
+				    .findElement(By.cssSelector("#toolbar")).getShadowRoot()
+				    .findElement(By.cssSelector("#refresh"));
+		}
+		
+		public WebElement getInProgressWorkflowStep(List<WebElement> steps, String expectedTitle) {
+		    System.out.println("****** Workflows listed in the Workflow tab are *****");
+		    for (int i = 0; i < steps.size(); i++) {
+		        WebElement step = steps.get(i);
+		        SearchContext stepShadow = step.getShadowRoot();
+		        String actualTitle = stepShadow
+		            .findElement(By.cssSelector("#label > #connectedBadge > #step-heading > #textWrapper > #step-title > span"))
+		            .getAttribute("title");
+
+		        boolean inProgress = step.getAttribute("class") != null &&
+		                             step.getAttribute("class").contains("iron-selected");
+
+		        System.out.println((i + 1) + ": " + actualTitle + (inProgress ? " (In Progress)" : ""));
+
+		        if (expectedTitle.equals(actualTitle)) {
+		            if (inProgress) {
+		                System.out.println("✅ As Expected: '" + expectedTitle + "' is In Progress.");
+		                return step;
+		            } else {
+		                throw new AssertionError("❌ '" + expectedTitle + "' is found but not in progress.");
+		            }
+		        }
+		    }
+
+		    throw new AssertionError("❌ '" + expectedTitle + "' not found in the workflow.");
+		}
+		
+
 }

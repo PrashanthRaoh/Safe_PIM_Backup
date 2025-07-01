@@ -5,16 +5,18 @@ TC 03 BSA PIE - Updating  BSA PIE record which is "On Hold - BSA PIE (User Selec
 Descrption - Updates the approve record to hold by user
 ************************************************/
 import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -29,7 +31,6 @@ import common_functions.Utils;
 import pages.BSAPIE_Page;
 import pages.DigitalAsset;
 import pages.HomePage;
-import pages.Login_Page;
 import pages.SearchPage2;
 import pages.SummaryPage;
 
@@ -37,7 +38,7 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 	public ExtentTest test;
 
 	@Test(groups = { "BSAPIEowner" })
-	public void BSAPIEOwner() throws InterruptedException, IOException {
+	public void BSAPIEOwner() throws InterruptedException, IOException, Exception {
 		String className = this.getClass().getSimpleName();
 		System.out.println(className);
 		test = BaseTest.extentreport.createTest(className);
@@ -46,7 +47,7 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		homePage = new HomePage(driver);
 		SearchPage2 searchPage = new SearchPage2(driver);
 		SummaryPage summaryPage = new SummaryPage(driver);
-		BSAPIE_Page BSAPIE_Page = new BSAPIE_Page(driver);
+		BSAPIE_Page BSAPIE_PO = new BSAPIE_Page(driver);
 		DigitalAsset digitalssetPage = new DigitalAsset(driver);
 
 		utils.waitForElement(() -> homePage.sellablematerialtabelement(), "clickable");
@@ -55,36 +56,19 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		utils.waitForElement(() -> homePage.BSAPIEUsecaseApprovalTab(), "visible");
 
-//		/**********************************
-//		 * Enter the Material ID which has all the attributes completed
-//		 **********************************/
-//		homePage.clickSearch_Products_Button().click();
-//		Thread.sleep(5000);
-//
-//		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
-//
-//		String Materialdata = Login_Page.getProperty("BSAPIEOnHoldUserselect");
-//		searchPage.searchthingdomain_Input_Mat_Id().click();
-//		searchPage.searchthingdomain_Input_Mat_Id().clear();
-//		searchPage.searchthingdomain_Input_Mat_Id().sendKeys(Materialdata);
-//		test.pass("Material id " + Materialdata + " is searched in Search thing domain");
-//		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-//		searchPage.searchthingdomain_Input_Mat_Id().sendKeys(Keys.ENTER);
-//		Thread.sleep(5000);
-
 		/**************************************************
 		 * ***** Click Use case approval tab
 		 **************************************************/
-		Thread.sleep(2000);
+		Thread.sleep(5000);
 		homePage.BSAPIEUsecaseApprovalTab().click();
 		Thread.sleep(5000);
 		test.pass("Clicked on Approval tab");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		Thread.sleep(2000);
 
-//		/********************************************
-//		 * Get number of items under use case approvals
-//		 ***************************************/
+		/********************************************
+		 * Get number of items under use case approvals
+		 ***************************************/
 		List<WebElement> summaryElements = driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='currentApp_home_rs']")).getShadowRoot()
@@ -97,7 +81,6 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 				.findElements(By.cssSelector("pebble-list-view > pebble-list-item > my-todo-summary"));
 
 		System.out.println("Total items: " + summaryElements.size());
-
 		List<String> expectedItems = Arrays.asList("Pending Usecase Approval - BSA PIE",
 				"On Hold - BSA PIE (User Selected)", "On Hold - BSA PIE (Rule Triggered)");
 
@@ -131,7 +114,7 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		utils.waitForElement(() -> searchPage.getgrid(), "clickable");
 		test.pass("Search page grid displayed after clicking on Pending Usecase Approval - BSA PIE");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-
+		
 		/**************************************************
 		 * --------- Apply filter for BSA PIE with staus Pending ------- *
 		 ************************************************/
@@ -144,10 +127,9 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		Thread.sleep(5000);
 		utils.waitForElement(() -> digitalssetPage.SellableProductStatus(), "clickable");
 		digitalssetPage.SellableProductStatus().click();
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		utils.waitForElement(() -> digitalssetPage.Status_InProgress_dropdownvalue(), "clickable");
 		digitalssetPage.Status_InProgress_dropdownvalue().click();
-//
 		Thread.sleep(2000);
 		digitalssetPage.Status_Apply_btn().click();
 		Thread.sleep(3000);
@@ -177,10 +159,11 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		assertTrue("There should be results after selecting In Progress sellable product", arrrowsdefined.size() > 0);
 
 		WebElement RowByRow = arrrowsdefined.get(0);
-		String SellableMaterialDescription = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
+		String SellableMaterialDescription = RowByRow
+				.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
 		String matid = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']")).getText();
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
-//
+
 		/*************************************************
 		 * --------- Click on the materialid from the result------- *
 		 ************************************************/
@@ -197,7 +180,8 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		/*************************************************
 		 * --------- Verify Pending Usecase Approval - BSA PIE is In Progress. ------- *
 		 ************************************************/
-		List<WebElement> pebbleSteps = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+		// Step 1: Get the list of all workflow step elements
+		List<WebElement> steps = driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
@@ -208,45 +192,22 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 						".base-grid-structure > .base-grid-structure-child-2 > #workflows-content > #accordion0 > [slot='accordion-content'] > .workflow-content > #workflowStepper_bsapieusecaseapproval_workflowDefinition"))
 				.findElements(By.cssSelector("pebble-step"));
 
-		System.out.println("****** Workflows listed in the Workflow tab are *****");
+		String expectedTitle = "Pending Usecase Approval - BSA PIE";
+		WebElement activeStep = BSAPIE_PO.getInProgressWorkflowStep(steps, expectedTitle);
 
-		boolean isInProgress = false;
-		String targetTitle = "Pending Usecase Approval - BSA PIE";
-//
-		for (int i = 0; i < pebbleSteps.size(); i++) {
-			WebElement step = pebbleSteps.get(i);
-			SearchContext stepShadow = step.getShadowRoot();
+		System.out.println("✅ Active workflow is : " + activeStep.getTagName());
 
-			String title = stepShadow.findElement(By.cssSelector("#label > #connectedBadge > #step-heading > #textWrapper > #step-title > span"))
-					.getAttribute("title");
-
-			boolean inProgress = step.getAttribute("class") != null && step.getAttribute("class").contains("iron-selected");
-			System.out.println((i + 1) + ": " + title + (inProgress ? " (In Progress)" : ""));
-
-			if (title.equals(targetTitle)) {
-				if (inProgress) {
-					System.out.println("As Expected : '" + targetTitle + "' is In Progress.");
-					isInProgress = true;
-					break; 
-				} else {
-					throw new AssertionError("As Expected : '" + targetTitle + "' is NOT in progress.");
-				}
-			}
-		}
-
-		if (!isInProgress) {
-			throw new AssertionError(targetTitle + "' not found in the workflow.");
-		}
-//
-//		/*************************************************
-//		 * --------- Click on drop down next to Attributes tab
-//		 ************************************************/
+		/*************************************************
+		 * --------- Click on drop down next to Attributes tab
+		 ************************************************/
+		Thread.sleep(2000);
 		WebElement dropdownWrapper = driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
-				.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot().findElement(By.cssSelector("#rockTabs"))
-				.getShadowRoot().findElement(By.cssSelector("#tab-attributes")).getShadowRoot()
+				.findElement(By.cssSelector("#rockDetailTabs")).getShadowRoot()
+				.findElement(By.cssSelector("#rockTabs")).getShadowRoot()
+				.findElement(By.cssSelector("#tab-attributes")).getShadowRoot()
 				.findElement(By.cssSelector("#dropdown-wrapper"));
 
 		dropdownWrapper.click();
@@ -254,7 +215,7 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		digitalssetPage.Use_Case_Attributes_selection().click();
 		Thread.sleep(2000);
 
-		utils.waitForElement(() -> BSAPIE_Page.BSAPIEUsecaseSalesOrgRegions_Auto(), "visible");
+		utils.waitForElement(() -> BSAPIE_PO.BSAPIEUsecaseSalesOrgRegions_Auto(), "visible");
 		/*************************************************
 		 * --------- Click on search icon and enter hold ------- *
 		 ************************************************/
@@ -269,57 +230,260 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		utils.waitForElement(() -> summaryPage.SystemAttributes(), "visible");
 		test.pass("System attributes elemets shown up");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-//
-		/*************************************************
-		 * --------- Wait for BSAPIESelectAttributesforHold object ------- *
-		 ************************************************/
-		utils.waitForElement(() -> BSAPIE_Page.BSAPIESelectAttributesforHold(), "clickable");
 
 		/*************************************************
 		 * --------- Wait for BSAPIESelectAttributesforHold object ------- *
 		 ************************************************/
-		BSAPIE_Page.BSAPIESelectAttributesforHold().click();
-		Thread.sleep(3000);
+		Thread.sleep(2000);
+		utils.waitForElement(() -> BSAPIE_PO.BSAPIESelectAttributesforHold(), "clickable");
+
+		/*************************************************
+		 * --------- Wait for BSAPIESelectAttributesforHold object ------- *
+		 ************************************************/
+		BSAPIE_PO.BSAPIESelectAttributesforHold().click();
+		Thread.sleep(2000);
 		utils.waitForElement(() -> digitalssetPage.Total_Checkboxes(), "clickable");
-		List<WebElement> totalcbs = digitalssetPage.Total_Checkboxes()
-				.findElements(By.cssSelector("[ref='eBodyViewport'] > [name='left'] > [role='row']"));
+		List<WebElement> totalcbs = digitalssetPage.Total_Checkboxes().findElements(By.cssSelector("[ref='eBodyViewport'] > [name='left'] > [role='row']"));
 		System.out.println("There are " + totalcbs.size() + " On hold items ");
 		assertTrue("Manual Hold items  available are ---  ", totalcbs.size() > 0);
 		test.pass("Manual Hold  items available");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		totalcbs.get(0).click();
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		test.pass("Selected the first hold item");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-		
+
 		digitalssetPage.Save_btn_BSA_PIE_Transaction().click();
+		Thread.sleep(2000);
+
+		/*************************************************
+		 * --------- Wait for the banner to appear
+		 ************************************************/
+//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//	    Function<WebDriver, WebElement> getBannerElement = drv -> {
+//	        try {
+//	            return drv.findElement(By.cssSelector("#app")).getShadowRoot()
+//	                .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+//	                .findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html")).getShadowRoot()
+//	                .findElement(By.cssSelector("#bind-html"));
+//	        } catch (Exception e) {
+//	            return null;
+//	        }
+//	    };
+//
+//	    WebElement banner = wait.until(drv -> {
+//	        WebElement el = getBannerElement.apply(drv);
+//	        return (el != null && el.isDisplayed()) ? el : null;
+//	    });
+//
+//	    String bannerText = banner.getText();
+//	    System.out.println("✅ Banner appeared with the text : " + bannerText);
+		
 		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
+		// Same function to locate the banner
 		Function<WebDriver, WebElement> getBannerElement = drv -> {
+		    try {
+		        return drv.findElement(By.cssSelector("#app")).getShadowRoot()
+		            .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+		            .findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html")).getShadowRoot()
+		            .findElement(By.cssSelector("#bind-html"));
+		    } catch (Exception e) {
+		        return null;
+		    }
+		};
+
+		// ✅ Wait for banner to appear
+		WebElement banner = wait.until(drv -> {
+		    WebElement el = getBannerElement.apply(drv);
+		    return (el != null && el.isDisplayed()) ? el : null;
+		});
+
+		// ✅ Capture text while it's still there
+		String bannerText = banner.getText();
+		System.out.println("✅ Banner appeared with text: " + bannerText);
+
+		// ✅ Now wait for it to disappear using a more tolerant condition
+		boolean bannerGone = new WebDriverWait(driver, Duration.ofSeconds(10)).until(drv -> {
+		    try {
+		        WebElement el = getBannerElement.apply(drv);
+		        if (el == null) return true; // Gone from DOM
+		        return !el.isDisplayed();    // Not visible
+		    } catch (StaleElementReferenceException | NoSuchElementException e) {
+		        return true; // Gone from DOM or stale reference
+		    } catch (Exception e) {
+		        // Log unexpected exceptions, return false to retry
+		        System.out.println("🔁 Retry due to unexpected error while waiting for banner to disappear: " + e.getMessage());
+		        return false;
+		    }
+		});
+
+		if (bannerGone) {
+		    System.out.println("✅ Banner disappeared.");
+		} else {
+		    throw new AssertionError("❌ Banner did not disappear as expected.");
+		}
+
+		
+		
+		
+		
+
+	    Thread.sleep(6000);
+	    test.pass("Data Saved");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+	    
+//	    boolean isBannerGone = false;
+//
+//	 try {
+//	     WebElement el = getBannerElement.apply(driver);
+//	     isBannerGone = (el == null || !el.isDisplayed());
+//	 } catch (Exception e) {
+//	     isBannerGone = true; 
+//	 }
+//
+//	 if (!isBannerGone) {
+//	     
+//	     new WebDriverWait(driver, Duration.ofSeconds(5)).until(drv -> {
+//	         try {
+//	             WebElement el = getBannerElement.apply(drv);
+//	             return (el == null || !el.isDisplayed());
+//	         } catch (Exception e) {
+//	             return true; 
+//	         }
+//	     });
+//	 }
+//
+//	 System.out.println("✅ Banner has disappeared.");
+
+		/*************************************************
+		 * --------- Refresh to get the updated workflow ------- *
+		 ************************************************/
+	    WebElement Workflow_Refresh_btn = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+	    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+	    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+	    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+	    .findElement(By.cssSelector("#entityManageHeader")).getShadowRoot()
+	    .findElement(By.cssSelector("#entityActions")).getShadowRoot()
+	    .findElement(By.cssSelector("#toolbar")).getShadowRoot()
+	    .findElement(By.cssSelector("#refresh")); 
+	    
+	    Workflow_Refresh_btn.click();
+		Thread.sleep(5000);
+		test.pass("Refreshed transaction to get the latest workflow status");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		/**********************
+			Wait till all the workflows re-appear
+		**********************/
+		Function<WebDriver, WebElement> SendbackforUsecase_workflow = drv -> {
 			try {
 				return drv.findElement(By.cssSelector("#app")).getShadowRoot()
-					.findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-					.findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html")).getShadowRoot()
-					.findElement(By.cssSelector("#bind-html"));
+					    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+					    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+					    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+					    .findElement(By.cssSelector("#entityManageSidebar")).getShadowRoot()
+					    .findElement(By.cssSelector("#sidebarTabs")).getShadowRoot()
+					    .findElement(By.cssSelector("[id^='rock-workflow-panel-component-rs']")).getShadowRoot()
+					    .findElement(By.cssSelector("#action-button-sendbackforusecaseapproval")).getShadowRoot()
+					    .findElement(By.cssSelector("#buttonTextBox"));
+
 			} catch (Exception e) {
 				return null;
 			}
 		};
 
-		WebElement banner = wait.until(driver -> {
-			WebElement el = getBannerElement.apply(driver);
-			return (el != null && el.isDisplayed()) ? el : null;
+		new WebDriverWait(driver, Duration.ofSeconds(10)).until(drv -> {
+			WebElement el = SendbackforUsecase_workflow.apply(drv);
+			return el != null && el.isDisplayed();
 		});
 
-		String bannerText = banner.getText();
-		System.out.println("✅ Banner appeared: " + bannerText);
+		test.pass("Refreshed successfull ");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+		/*************************************************
+		 * --------- Refresh to get the updated workflow ------- *
+		 ************************************************/
+		List<WebElement> stepsRefreshed = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector("#entityManageSidebar")).getShadowRoot()
+				.findElement(By.cssSelector("#sidebarTabs")).getShadowRoot()
+				.findElement(By.cssSelector("[id^='rock-workflow-panel-component-rs']")).getShadowRoot()
+				.findElement(By.cssSelector(
+						".base-grid-structure > .base-grid-structure-child-2 > #workflows-content > #accordion0 > [slot='accordion-content'] > .workflow-content > #workflowStepper_bsapieusecaseapproval_workflowDefinition"))
+				.findElements(By.cssSelector("pebble-step"));
 
-		new WebDriverWait(driver, Duration.ofSeconds(5)).until(driver -> {
-			WebElement el = getBannerElement.apply(driver);
-			return el == null || !el.isDisplayed();
-		});
+		String expectedTitle_Refreshed = "On Hold - BSA PIE (User Selected)";
+//		WebElement targetTitleRefreshed = BSAPIE_PO.getInProgressWorkflowStep(steps, expectedTitle_Refreshed);
+		boolean isInProgressRefreshed = false;
 
-		System.out.println("✅ Banner disappeared.");
+		for (int i = 0; i < stepsRefreshed.size(); i++) {
+			WebElement step = stepsRefreshed.get(i);
+			SearchContext stepShadow = step.getShadowRoot();
+
+			String actualTitle = stepShadow.findElement(By.cssSelector("#label > #connectedBadge > #step-heading > #textWrapper > #step-title > span"))
+					.getAttribute("title");
+
+			boolean inProgress = step.getAttribute("class") != null && step.getAttribute("class").contains("iron-selected");
+			System.out.println((i + 1) + ": " + actualTitle + (inProgress ? " (In Progress)" : ""));
+
+			if (actualTitle.equals(expectedTitle_Refreshed)) {
+				if (inProgress) {
+					System.out.println("✅ As Expected: '" + actualTitle + "' is In Progress.");
+					isInProgressRefreshed = true;
+					break;
+				} else {
+					throw new AssertionError("❌ '" + actualTitle + "' is found but not in progress.");
+				}
+			}
+		}
+		if (!isInProgressRefreshed) {
+			throw new AssertionError("❌ '" + expectedTitle_Refreshed + "' not found in the workflow.");
+		}
+		
+		test.pass("Record moved to On Hold BSA PIE (User Selected) ");
+		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///**********************************
+// * Enter the Material ID which has all the attributes completed
+// **********************************/
+//homePage.clickSearch_Products_Button().click();
+//Thread.sleep(5000);
+//
+//utils.waitForElement(() -> searchPage.getgrid(), "clickable");
+//
+//String Materialdata = Login_Page.getProperty("BSAPIEOnHoldUserselect");
+//searchPage.searchthingdomain_Input_Mat_Id().click();
+//searchPage.searchthingdomain_Input_Mat_Id().clear();
+//searchPage.searchthingdomain_Input_Mat_Id().sendKeys(Materialdata);
+//test.pass("Material id " + Materialdata + " is searched in Search thing domain");
+//test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//searchPage.searchthingdomain_Input_Mat_Id().sendKeys(Keys.ENTER);
+//Thread.sleep(5000);

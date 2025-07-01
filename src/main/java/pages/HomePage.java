@@ -16,7 +16,6 @@ public class HomePage {
 
 	public WebDriver driver;
 	private WebDriverWait wait;
-	Utils utils = new Utils(driver);
 	private By RootElement = By.cssSelector("#app");
 	private WebElement tablist_Homescreen;
 

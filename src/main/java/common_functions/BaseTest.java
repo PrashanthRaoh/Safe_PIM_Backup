@@ -64,13 +64,13 @@ public class BaseTest {
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(50));
 		driver.manage().window().maximize();
-		utils = new Utils(driver);
+		utils = new Utils(driver,extentTest);
 		loginPage = new Login_Page(driver);
 		loginPage.LogintoPIM(UseCaseOwner);
 		homePage = new HomePage(driver);
 	}
 	
-//	@AfterClass
+	@AfterClass
 	public void Logout() throws InterruptedException {
 		homePage.AppHeader_Administrator().click();
 		Thread.sleep(1000);

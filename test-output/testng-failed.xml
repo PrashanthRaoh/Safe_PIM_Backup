@@ -7,6 +7,7 @@
       <class name="pim.automation.framework.TC_007_OnHold_BSA_OnHold_UserSelected">
         <methods>
           <include name="setUp"/>
+          <include name="Logout"/>
           <include name="BSAPIEOwner"/>
           <include name="intitializeReport"/>
           <include name="publishReport"/>

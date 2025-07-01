@@ -130,15 +130,15 @@
                   <a name="BSAPIEOwner">
                   </a> <!-- BSAPIEOwner -->
                   <span class="method-name">BSAPIEOwner</span>
-                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for pim.automation.framework.TC_007_OnHold_BSA_OnHold_UserSelected$$Lambda/0x0000000100382128@7e52a26b (tried for 5 second(s) with 500 milliseconds interval)
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for pim.automation.framework.TC_007_OnHold_BSA_OnHold_UserSelected$$Lambda/0x000000010033f1c0@2a773f81 (tried for 5 second(s) with 500 milliseconds interval)
 Build info: version: &apos;4.23.1&apos;, revision: &apos;656257d8e9&apos;
 System info: os.name: &apos;Windows 10&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;21.0.4&apos;
 Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.69, chrome: {chromedriverVersion: 137.0.7151.119 (e0ac9d12dff..., userDataDir: C:\Users\raoad\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55393}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55393/devtoo..., se:cdpVersion: 137.0.7151.69, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: f4fd30af2f2fc569ab93041a0e75a13c
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 137.0.7151.69, chrome: {chromedriverVersion: 137.0.7151.119 (e0ac9d12dff..., userDataDir: C:\Users\raoad\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52373}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52373/devtoo..., se:cdpVersion: 137.0.7151.69, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 91cea76fefdc1c3d481d1e522c1a76a7
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-	at pim.automation.framework.TC_007_OnHold_BSA_OnHold_UserSelected.BSAPIEOwner(TC_007_OnHold_BSA_OnHold_UserSelected.java:319)
+	at pim.automation.framework.TC_007_OnHold_BSA_OnHold_UserSelected.BSAPIEOwner(TC_007_OnHold_BSA_OnHold_UserSelected.java:306)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 ... Removed 25 stack frames
 </div> <!-- stack-trace -->
@@ -211,12 +211,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'BSAPIEOwner')
 data.setCell(0, 2, 'pim.automation.framework.TC_007_OnHold_BSA_OnHold_UserSelected')
-data.setCell(0, 3, 107509);
+data.setCell(0, 3, 161984);
 window.suiteTableData['PIM_automation_Suite']= { tableData: data, tableDiv: 'times-div-PIM_automation_Suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 2 minutes</span>
               <div id="times-div-PIM_automation_Suite">
               </div> <!-- times-div-PIM_automation_Suite -->
             </div> <!-- times-div -->
@@ -249,17 +249,21 @@ return data;
               </div> <!-- configuration-suite before -->
               <div class="configuration-class before">
                 <span class="method-name">setUp(BSAPIEowner)</span>
-                <span class="method-start">749 ms</span>
+                <span class="method-start">581 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
                 <span class="method-name">BSAPIEOwner</span>
-                <span class="method-start">21492 ms</span>
+                <span class="method-start">14097 ms</span>
               </div> <!-- test-method -->
+              <div class="configuration-class after">
+                <span class="method-name">Logout</span>
+                <span class="method-start">176243 ms</span>
+              </div> <!-- configuration-class after -->
               <div class="configuration-suite after">
                 <span class="method-name">publishReport</span>
-                <span class="method-start">129199 ms</span>
+                <span class="method-start">184518 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

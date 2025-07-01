@@ -16,17 +16,25 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+
+import java.util.function.Function;
 import java.util.function.Supplier;
+
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 
-public class Utils extends BaseTest {
+public class Utils  {
 	private WebDriver driver;
 	public WebDriverWait wait;
 	final Exception[] lastException = { null };
+	private ExtentTest test;
 
-	public Utils(WebDriver driver) {
+	public Utils(WebDriver driver, ExtentTest test) {
 		this.driver = driver;
+		this.test = test;
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	}
 
 	/*****************************************************
@@ -34,66 +42,59 @@ public class Utils extends BaseTest {
 	 ******************************************************/
 
 	public WebElement waitForElement(Supplier<WebElement> elementSupplier, String conditionType) {
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
-		final Exception[] lastException = { null }; // Track last exception for reporting
-
 		try {
 			switch (conditionType.toLowerCase()) {
-			case "clickable": {
-				return wait.until(driver -> {
-					try {
-						WebElement el = elementSupplier.get();
-						if (el.isDisplayed() && el.isEnabled()) {
-							return el;
+				case "clickable":
+					return wait.until(driver -> {
+						try {
+							WebElement el = elementSupplier.get();
+							return (el != null && el.isDisplayed() && el.isEnabled()) ? el : null;
+						} catch (Exception ignored) {
+							return null;
 						}
-					} catch (StaleElementReferenceException | NoSuchElementException e) {
-						lastException[0] = e;
-					}
-					return null;
-				});
-			}
+					});
 
-			case "visible": {
-				return wait.until(driver -> {
-					try {
-						WebElement el = elementSupplier.get();
-						if (el.isDisplayed()) {
-							return el;
+				case "visible":
+					return wait.until(driver -> {
+						try {
+							WebElement el = elementSupplier.get();
+							return (el != null && el.isDisplayed()) ? el : null;
+						} catch (Exception ignored) {
+							return null;
 						}
-					} catch (StaleElementReferenceException | NoSuchElementException e) {
-						lastException[0] = e;
-					}
+					});
+
+				case "invisibility":
+					wait.until(driver -> {
+						try {
+							WebElement el = elementSupplier.get();
+							return el == null || !el.isDisplayed();
+						} catch (Exception ignored) {
+							return true;
+						}
+					});
 					return null;
-				});
-			}
 
-			case "invisibility": {
-				wait.until(driver -> {
-					try {
-						return !elementSupplier.get().isDisplayed();
-					} catch (StaleElementReferenceException | NoSuchElementException e) {
-						return true;
-					}
-				});
-				return null;
+				default:
+					throw new IllegalArgumentException("Invalid wait condition type: " + conditionType);
 			}
-
-			default:
-				throw new IllegalArgumentException("Invalid wait condition type: " + conditionType);
-			}
-
 		} catch (Exception e) {
 			try {
 				String screenshotPath = Takescreenshot(driver);
-				BaseTest.extentTest.fail("Unexpected error while waiting for element: " + e.getMessage(),
+				if (test != null) {
+					test.fail("Wait failed: " + e.getMessage(),
 						MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+				}
 			} catch (IOException io) {
 				io.printStackTrace();
 			}
-			throw new RuntimeException("Unexpected error in waitForElement: " + e.getMessage(), e);
+			throw new RuntimeException("waitForElement failed: " + e.getMessage(), e);
 		}
 	}
-
+	
+	/*******************
+	 * Taking screenshot method
+	*******************/
 	public static String Takescreenshot(WebDriver driver) throws IOException {
 		Date today = new Date();
 		SimpleDateFormat SIMPDFORMAT = new SimpleDateFormat("ddMMYY_HHmmss");
@@ -108,4 +109,36 @@ public class Utils extends BaseTest {
 	public String getClassName(Object obj) {
 		return obj.getClass().getSimpleName();
 	}
+	
+	public static String waitForBannerAndGetText(WebDriver driver, Duration timeout) {
+	    WebDriverWait wait = new WebDriverWait(driver, timeout);
+	    Function<WebDriver, WebElement> getBannerElement = drv -> {
+	        try {
+	            return drv.findElement(By.cssSelector("#app")).getShadowRoot()
+	                .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+	                .findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html")).getShadowRoot()
+	                .findElement(By.cssSelector("#bind-html"));
+	        } catch (Exception e) {
+	            return null;
+	        }
+	    };
+
+	    WebElement banner = wait.until(drv -> {
+	        WebElement el = getBannerElement.apply(drv);
+	        return (el != null && el.isDisplayed()) ? el : null;
+	    });
+
+	    String bannerText = banner.getText();
+	    System.out.println("✅ Banner appeared with the text : " + bannerText);
+
+	    // Wait for banner to disappear
+	    new WebDriverWait(driver, Duration.ofSeconds(10)).until(drv -> {
+	        WebElement el = getBannerElement.apply(drv);
+	        return el == null || !el.isDisplayed();
+	    });
+
+	    System.out.println("✅ Banner disappeared.");
+	    return bannerText;
+	}
+
 }

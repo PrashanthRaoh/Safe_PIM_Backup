@@ -1,14 +1,24 @@
 package pim.automation.framework;
 
+/************************************************
+TC 02 - Updating BSA PIE record which is in  "BSA PIE Pending UseCase Approval" Workflow.
+Descrption - This approves BSA PIE Pending UseCase Approval the record
+************************************************/
 import static org.junit.Assert.assertTrue;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.SearchContext;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
@@ -79,15 +89,13 @@ public class TC_005_BSAPIE_Pending_UseCase_Approval extends BaseTest {
 		List<WebElement> arrrowsdefined = rowsredefined.getShadowRoot().findElements(By.cssSelector(
 				"#lit-grid > div > div.ag-root-wrapper-body.ag-layout-normal.ag-focus-managed > div.ag-root.ag-unselectable.ag-layout-normal > div.ag-body-viewport.ag-layout-normal.ag-row-no-animation > div.ag-center-cols-clipper > div > div > div"));
 
-		System.out.println("Total rows after clicking on Pending Usecase Approval - BSA PIE Inprogress status -- "
-				+ arrrowsdefined.size());
+		System.out.println("Total rows after clicking on Pending Usecase Approval - BSA PIE Inprogress status -- " + arrrowsdefined.size());
 		test.pass("Rows after after clicking on Pending Usecase Approval - BSA PIE Inprogress status appeared");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		assertTrue("There should be results after applying filters with Inprogress status", arrrowsdefined.size() > 0);
 
 		WebElement RowByRow = arrrowsdefined.get(0);
-		String SellableMaterialDescription = RowByRow
-				.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
+		String SellableMaterialDescription = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
 		String matid = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']")).getText();
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
 
@@ -107,60 +115,117 @@ public class TC_005_BSAPIE_Pending_UseCase_Approval extends BaseTest {
 		/*************************************************
 		 * --------- Verify workflow tab Hireacrhy. ------- *
 		 ************************************************/
-		List<WebElement> pebbleSteps = driver.findElement(By.cssSelector("#app")).getShadowRoot()
-				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
-				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
-				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
-				.findElement(By.cssSelector("#entityManageSidebar")).getShadowRoot()
-				.findElement(By.cssSelector("#sidebarTabs")).getShadowRoot()
-				.findElement(By.cssSelector("[id^='rock-workflow-panel-component-rs']")).getShadowRoot()
-				.findElement(By.cssSelector(
-						".base-grid-structure > .base-grid-structure-child-2 > #workflows-content > #accordion0 > [slot='accordion-content'] > .workflow-content > #workflowStepper_bsapieusecaseapproval_workflowDefinition"))
-				.findElements(By.cssSelector("pebble-step"));
+		List<WebElement> steps = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+			    .findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector("#entityManageSidebar")).getShadowRoot()
+			    .findElement(By.cssSelector("#sidebarTabs")).getShadowRoot()
+			    .findElement(By.cssSelector("[id^='rock-workflow-panel-component-rs']")).getShadowRoot()
+			    .findElement(By.cssSelector(
+			        ".base-grid-structure > .base-grid-structure-child-2 > #workflows-content > #accordion0 > [slot='accordion-content'] > .workflow-content > #workflowStepper_bsapieusecaseapproval_workflowDefinition"))
+			    .findElements(By.cssSelector("pebble-step"));
 
-		System.out.println("******Work flows listed in the Work flow tab are***** ");
-		List<String> stepTitles = new ArrayList<>();
-		int j = 0;
-		for (WebElement step : pebbleSteps) {
-			SearchContext stepShadow = step.getShadowRoot();
-			WebElement spanTitle = stepShadow.findElement(By.cssSelector("#label > #connectedBadge > #step-heading > #textWrapper > #step-title > span"));
+			String expectedTitle = "Pending Usecase Approval - BSA PIE";
+			WebElement activeStep = null;
 
-			String title = spanTitle.getAttribute("title");
-			stepTitles.add(title);
-			System.out.println("Step " + (++j) + ": " + title);
-		}
-		System.out.println("*************");
+			System.out.println("🔍 Listing all workflow steps:");
+
+			for (int i = 0; i < steps.size(); i++) {
+			    WebElement step = steps.get(i);
+			    SearchContext stepShadow = step.getShadowRoot();
+			    String actualTitle = stepShadow.findElement(By.cssSelector("#label > #connectedBadge > #step-heading > #textWrapper > #step-title > span"))
+			        .getAttribute("title");
+
+			    boolean isActive = step.getAttribute("class") != null && step.getAttribute("class").contains("iron-selected");
+			    System.out.println((i + 1) + ": " + actualTitle + (isActive ? " (🟢 Active)" : ""));
+
+			    if (isActive && actualTitle.equals(expectedTitle)) {
+			        activeStep = step;
+			    }
+			}
+
+			if (activeStep != null) {
+			    System.out.println("As Expected active workflow step is: " + expectedTitle);
+			} else {
+			    throw new AssertionError("❌ Expected active step '" + expectedTitle + "' not found.");
+			}
 		
-		test.pass("Workflows hirearchy listed for the record");
+		test.pass("As Expected active workflow step is: " + expectedTitle);
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
-
-		String expectedStep = "Pending Usecase Approval - BSA PIE";
-		Assert.assertTrue(stepTitles.contains(expectedStep),
-				"Expected state '" + expectedStep + "' not found in: " + stepTitles);
 
 		digitalssetPage.Pending_Use_Case_Approval_Commentinputbox().sendKeys("Approving the record");
 		Thread.sleep(2000);
-		
+
 		test.pass("Approving the record");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		digitalssetPage.Pending_Use_Case_Approval_Approve_btn().click();
-		Thread.sleep(8000);
+		Thread.sleep(5000);
+//		
+		/*************************************************
+		 * --------- Wait for the banner to appear
+		 ************************************************/
+		WebDriverWait wait1 = new WebDriverWait(driver, Duration.ofSeconds(10));
+		Function<WebDriver, WebElement> getBannerElement = drv -> {
+			try {
+				return drv.findElement(By.cssSelector("#app")).getShadowRoot().findElement(By.cssSelector("[id^='rs']"))
+						.getShadowRoot().findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html"))
+						.getShadowRoot().findElement(By.cssSelector("#bind-html"));
+			} catch (Exception e) {
+				return null;
+			}
+		};
+
+		WebElement banner = wait1.until(drv -> {
+			WebElement el = getBannerElement.apply(drv);
+			return (el != null && el.isDisplayed()) ? el : null;
+		});
+
+		String bannerText = banner.getText();
+		System.out.println("✅ Banner appeared with the text : " + bannerText);
+
+		Thread.sleep(3000);
 		
-		List<WebElement> pebbleSteps_after = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+		/*************************************************
+		 * --------- Check Workflow to be completed *************
+		 ************************************************/
+		List<WebElement> allSteps = driver.findElement(By.cssSelector("#app")).getShadowRoot()
 				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
 				.findElement(By.cssSelector("#entityManageSidebar")).getShadowRoot()
 				.findElement(By.cssSelector("#sidebarTabs")).getShadowRoot()
 				.findElement(By.cssSelector("[id^='rock-workflow-panel-component-rs']")).getShadowRoot()
-				.findElement(By.cssSelector(
-						".base-grid-structure > .base-grid-structure-child-2 > #workflows-content > #accordion0 > [slot='accordion-content'] > .workflow-content > #workflowStepper_bsapieusecaseapproval_workflowDefinition"))
 				.findElements(By.cssSelector("pebble-step"));
-		
-		Assert.assertTrue(pebbleSteps_after.size() <= 0);
+
+		List<WebElement> visibleSteps = allSteps.stream().filter(WebElement::isDisplayed).collect(Collectors.toList());
+		int visibleCount = visibleSteps.size();
+		System.out.println("✅ Workflow that appeared after approval are : " + visibleCount);
+
+		Assert.assertEquals(visibleCount, 0, "❌ Expected no workflows , but found: " + visibleCount);
 		test.pass("Record moved to Approved state");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		
+		
+		
+//		
+////		List<WebElement> pebbleSteps_after = driver.findElement(By.cssSelector("#app")).getShadowRoot()
+////				.findElement(By.cssSelector("#contentViewManager")).getShadowRoot()
+////				.findElement(By.cssSelector("[id^='currentApp_entity-manage_rs']")).getShadowRoot()
+////				.findElement(By.cssSelector("[id^='app-entity-manage-component-rs']")).getShadowRoot()
+////				.findElement(By.cssSelector("#entityManageSidebar")).getShadowRoot()
+////				.findElement(By.cssSelector("#sidebarTabs")).getShadowRoot()
+////				.findElement(By.cssSelector("[id^='rock-workflow-panel-component-rs']")).getShadowRoot()
+////				.findElement(By.cssSelector(
+////						".base-grid-structure > .base-grid-structure-child-2 > #workflows-content > #accordion0 > [slot='accordion-content'] > .workflow-content > #workflowStepper_bsapieusecaseapproval_workflowDefinition"))
+////				.findElements(By.cssSelector("pebble-step"));
+////		
+////		Assert.assertTrue(pebbleSteps_after.size() <= 0);
+////		test.pass("Record moved to Approved state");
+////		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
+//		
+//		
+//		
 
 		
 		

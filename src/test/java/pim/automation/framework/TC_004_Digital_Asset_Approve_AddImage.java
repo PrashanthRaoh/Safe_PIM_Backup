@@ -1,5 +1,10 @@
 package pim.automation.framework;
 
+/************************************************
+TC 09 - Verify user should be able to approve entity pending for "Digital Asset Workflow"
+Descrption - Adds Image DAM: Review Representative Image (Primary)
+************************************************/
+
 import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.Arrays;
