@@ -9,14 +9,11 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.SearchContext;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -51,11 +48,9 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		DigitalAsset digitalssetPage = new DigitalAsset(driver);
 
 		utils.waitForElement(() -> homePage.sellablematerialtabelement(), "clickable");
-
 		test.pass("Home Page is displayed");
 		test.log(Status.PASS, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 		utils.waitForElement(() -> homePage.BSAPIEUsecaseApprovalTab(), "visible");
-
 		/**************************************************
 		 * ***** Click Use case approval tab
 		 **************************************************/
@@ -159,8 +154,7 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		assertTrue("There should be results after selecting In Progress sellable product", arrrowsdefined.size() > 0);
 
 		WebElement RowByRow = arrrowsdefined.get(0);
-		String SellableMaterialDescription = RowByRow
-				.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
+		String SellableMaterialDescription = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialdescription']")).getText();
 		String matid = RowByRow.findElement(By.cssSelector("div[col-id='sellablematerialid']")).getText();
 		System.out.println("Material ID -- " + matid + " Material Description --" + SellableMaterialDescription);
 
@@ -259,103 +253,30 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 		/*************************************************
 		 * --------- Wait for the banner to appear
 		 ************************************************/
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-//	    Function<WebDriver, WebElement> getBannerElement = drv -> {
-//	        try {
-//	            return drv.findElement(By.cssSelector("#app")).getShadowRoot()
-//	                .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-//	                .findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html")).getShadowRoot()
-//	                .findElement(By.cssSelector("#bind-html"));
-//	        } catch (Exception e) {
-//	            return null;
-//	        }
-//	    };
-//
-//	    WebElement banner = wait.until(drv -> {
-//	        WebElement el = getBannerElement.apply(drv);
-//	        return (el != null && el.isDisplayed()) ? el : null;
-//	    });
-//
-//	    String bannerText = banner.getText();
-//	    System.out.println("✅ Banner appeared with the text : " + bannerText);
-		
-		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		// Same function to locate the banner
-		Function<WebDriver, WebElement> getBannerElement = drv -> {
-		    try {
-		        return drv.findElement(By.cssSelector("#app")).getShadowRoot()
-		            .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
-		            .findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html")).getShadowRoot()
-		            .findElement(By.cssSelector("#bind-html"));
-		    } catch (Exception e) {
-		        return null;
-		    }
-		};
+	    Function<WebDriver, WebElement> getBannerElement = drv -> {
+	        try {
+	            return drv.findElement(By.cssSelector("#app")).getShadowRoot()
+	                .findElement(By.cssSelector("[id^='rs']")).getShadowRoot()
+	                .findElement(By.cssSelector("#pebbleAppToast > pebble-echo-html")).getShadowRoot()
+	                .findElement(By.cssSelector("#bind-html"));
+	        } catch (Exception e) {
+	            return null;
+	        }
+	    };
 
-		// ✅ Wait for banner to appear
-		WebElement banner = wait.until(drv -> {
-		    WebElement el = getBannerElement.apply(drv);
-		    return (el != null && el.isDisplayed()) ? el : null;
-		});
+	    WebElement banner = wait.until(drv -> {
+	        WebElement el = getBannerElement.apply(drv);
+	        return (el != null && el.isDisplayed()) ? el : null;
+	    });
 
-		// ✅ Capture text while it's still there
-		String bannerText = banner.getText();
-		System.out.println("✅ Banner appeared with text: " + bannerText);
-
-		// ✅ Now wait for it to disappear using a more tolerant condition
-		boolean bannerGone = new WebDriverWait(driver, Duration.ofSeconds(10)).until(drv -> {
-		    try {
-		        WebElement el = getBannerElement.apply(drv);
-		        if (el == null) return true; // Gone from DOM
-		        return !el.isDisplayed();    // Not visible
-		    } catch (StaleElementReferenceException | NoSuchElementException e) {
-		        return true; // Gone from DOM or stale reference
-		    } catch (Exception e) {
-		        // Log unexpected exceptions, return false to retry
-		        System.out.println("🔁 Retry due to unexpected error while waiting for banner to disappear: " + e.getMessage());
-		        return false;
-		    }
-		});
-
-		if (bannerGone) {
-		    System.out.println("✅ Banner disappeared.");
-		} else {
-		    throw new AssertionError("❌ Banner did not disappear as expected.");
-		}
-
+	    String bannerText = banner.getText();
+	    System.out.println("✅ Banner appeared with the text : " + bannerText);
 		
-		
-		
-		
-
 	    Thread.sleep(6000);
 	    test.pass("Data Saved");
 		test.log(Status.INFO, MediaEntityBuilder.createScreenCaptureFromPath(Utils.Takescreenshot(driver)).build());
 	    
-//	    boolean isBannerGone = false;
-//
-//	 try {
-//	     WebElement el = getBannerElement.apply(driver);
-//	     isBannerGone = (el == null || !el.isDisplayed());
-//	 } catch (Exception e) {
-//	     isBannerGone = true; 
-//	 }
-//
-//	 if (!isBannerGone) {
-//	     
-//	     new WebDriverWait(driver, Duration.ofSeconds(5)).until(drv -> {
-//	         try {
-//	             WebElement el = getBannerElement.apply(drv);
-//	             return (el == null || !el.isDisplayed());
-//	         } catch (Exception e) {
-//	             return true; 
-//	         }
-//	     });
-//	 }
-//
-//	 System.out.println("✅ Banner has disappeared.");
-
 		/*************************************************
 		 * --------- Refresh to get the updated workflow ------- *
 		 ************************************************/
@@ -414,7 +335,6 @@ public class TC_007_OnHold_BSA_OnHold_UserSelected extends BaseTest {
 				.findElements(By.cssSelector("pebble-step"));
 
 		String expectedTitle_Refreshed = "On Hold - BSA PIE (User Selected)";
-//		WebElement targetTitleRefreshed = BSAPIE_PO.getInProgressWorkflowStep(steps, expectedTitle_Refreshed);
 		boolean isInProgressRefreshed = false;
 
 		for (int i = 0; i < stepsRefreshed.size(); i++) {
